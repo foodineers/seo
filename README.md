@@ -275,16 +275,15 @@ You are allowed to only override the properties you want and omit the other prop
 3. `author` (should be the author's name)
 4. `image` (should be the image path and be compatible with `$url = public_path($path)`)
 5. `url` (by default it will be `url()->current()`)
-6. `enableTitleSuffix` (should be `true` or `false`, this allows you to set a suffix in the `config/seo.php` file, which will be appended to every title)
-7. `site_name`
-8. `published_at` (should be a `Carbon` instance with the published time. By default, this will be the `created_at` property of your model)
-9. `modified_at` (should be a `Carbon` instance with the published time. By default, this will be the `updated_at` property of your model)
-10. `section` (should be the name of the section of your content. It is used for OpenGraph article tags and it could be something like the category of the post)
-11. `tags` (should be an array with tags. It is used for the OpenGraph article tags)
-12. `schema` (this should be a SchemaCollection instance, where you can configure the JSON-LD structured data schema tags)
-13. `locale` (this should be the locale of the page. By default, this is derived from `app()->getLocale()` and it looks like `en` or `nl`.)
-14. `robots` (should be a string with the content value of the robots meta tag, like `nofollow,noindex`). You can also set `$SEOData->noIndex = true` to prevent a page from being indexed.
-15. `alternates` (should be an array of `AlternateTag`). Will render `<link rel="alternate" ... />` tags.
+6. `siteName`
+7. `publishedAt` (should be a `Carbon` instance with the published time. By default, this will be the `created_at` property of your model)
+8. `modifiedAt` (should be a `Carbon` instance with the published time. By default, this will be the `updated_at` property of your model)
+9. `section` (should be the name of the section of your content. It is used for OpenGraph article tags and it could be something like the category of the post)
+10. `tags` (should be an array with tags. It is used for the OpenGraph article tags)
+11. `schema` (this should be a SchemaCollection instance, where you can configure the JSON-LD structured data schema tags)
+12. `locale` (should be the locale of the page. By default, this is derived from `app()->getLocale()` and it looks like `en` or `nl`.)
+13. `robots` (should be a string with the content value of the robots meta tag, like `nofollow,noindex`). You can also set `$SEOData->noindex = true` to prevent a page from being indexed.
+14. `alternates` (should be an array of `AlternateTag`). Will render `<link rel="alternate" ... />` tags.
 
 Finally, you should update your Blade file, so that it can receive your model when generating the tags:
 

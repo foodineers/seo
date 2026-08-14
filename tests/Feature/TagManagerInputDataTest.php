@@ -18,14 +18,14 @@ it('normalizes SEOData with config defaults and inferred title', function (): vo
     expect($manager->SEOData?->title)->toBe('My Article')
         ->and($manager->SEOData?->description)->toBe('Fallback description')
         ->and($manager->SEOData?->author)->toBe('Fallback author')
-        ->and($manager->SEOData?->site_name)->toBe('Fallback site')
+        ->and($manager->SEOData?->siteName)->toBe('Fallback site')
         ->and($manager->SEOData?->favicon)->toBe(secure_url('/favicon.ico'))
-        ->and($manager->SEOData?->twitter_username)->toBe('@foodieneers');
+        ->and($manager->SEOData?->twitterUsername)->toBe('@foodieneers');
 });
 
 it('uses noindex robots when SEOData is marked as noindex', function (): void {
     $manager = resolve(TagManager::class)->for(new SEOData(
-        noIndex: true,
+        noindex: true,
     ));
 
     expect($manager->SEOData?->robots)->toBe('noindex, nofollow');

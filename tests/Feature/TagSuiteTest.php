@@ -36,7 +36,7 @@ it('renders canonical tag and can be disabled', function (): void {
 
     $withCanonical = renderSeo(new SEOData(
         url: 'https://example.com/post',
-        canonical_url: 'https://example.com/canonical',
+        canonicalUrl: 'https://example.com/canonical',
     ));
 
     expect($withCanonical)->toContain('<link rel="canonical" href="https://example.com/canonical">');
@@ -142,12 +142,12 @@ it('renders OpenGraph tags including article metadata', function (): void {
         image: 'https://cdn.example.com/cover.jpg',
         url: 'https://example.com/post',
         imageMeta: $imageMeta,
-        published_at: $published,
-        modified_at: $modified,
+        publishedAt: $published,
+        modifiedAt: $modified,
         section: 'News',
         tags: ['tag-one', 'tag-two'],
         type: 'article',
-        site_name: 'Example',
+        siteName: 'Example',
         openGraphTitle: 'OG custom title',
     ))->render();
 
@@ -177,7 +177,7 @@ it('renders twitter card tags with summary card when ratio is near square', func
         description: 'Twitter description',
         image: 'https://cdn.example.com/cover.jpg',
         imageMeta: $imageMeta,
-        twitter_username: '@example',
+        twitterUsername: '@example',
     ))->render();
 
     expect($output)

@@ -33,40 +33,50 @@ class TagManager implements Renderable, Stringable
         $url = $source->url ?: request()->path();
         $SEOData = clone $source;
 
-        $title = $SEOData->title;
-        if ($title === null && config('seo.title.infer_title_from_url')) {
-            $title = $this->inferTitleFromUrl($url);
-        }
-        $SEOData->title = $title;
+        $SEOData->title = $this->resolveTitle($SEOData->title, $url);
+        $this->applyConfigDefaults($SEOData);
+        $SEOData->url = url($url);
+        $SEOData->robots = $SEOData->noindex ? 'noindex, nofollow' : $SEOData->robots;
+        $this->absolutizeAssets($SEOData);
 
+        return $SEOData;
+    }
+
+    protected function resolveTitle(?string $title, string $url): ?string
+    {
+        if ($title !== null || ! config('seo.title.infer_title_from_url')) {
+            return $title;
+        }
+
+        return $this->inferTitleFromUrl($url);
+    }
+
+    protected function applyConfigDefaults(SEOData $SEOData): void
+    {
         $SEOData->description ??= config('seo.description.fallback');
         $SEOData->author ??= config('seo.author.fallback');
-
-        $SEOData->url = url($url);
-        $SEOData->twitter_username ??= Str::of(config('seo.twitter.@username'))->start('@')->toString();
-        $SEOData->site_name ??= config('seo.site_name');
+        $SEOData->twitterUsername ??= Str::of(config('seo.twitter.@username'))->start('@')->toString();
+        $SEOData->siteName ??= config('seo.site_name');
         $SEOData->favicon ??= config('seo.favicon');
         $SEOData->locale ??= app()->getLocale();
-        $SEOData->robots = $SEOData->noIndex ? 'noindex, nofollow' : $SEOData->robots;
+        $SEOData->image ??= config('seo.image.fallback');
+    }
 
-        if ($SEOData->image === null) {
-            $SEOData->image = config('seo.image.fallback');
-        }
-
-        if ($SEOData->logo === null) {
-            $SEOData->logo = config('seo.logo');
-        }
-
-        if ($SEOData->image && filter_var(str_replace(' ', '%20', $SEOData->image), FILTER_VALIDATE_URL) === false) {
+    protected function absolutizeAssets(SEOData $SEOData): void
+    {
+        if ($SEOData->image && ! $this->isAbsoluteUrl($SEOData->image)) {
             $SEOData->imageMeta();
             $SEOData->image = secure_url($SEOData->image);
         }
 
-        if ($SEOData->favicon !== null && filter_var(str_replace(' ', '%20', $SEOData->favicon), FILTER_VALIDATE_URL) === false) {
+        if ($SEOData->favicon !== null && ! $this->isAbsoluteUrl($SEOData->favicon)) {
             $SEOData->favicon = secure_url($SEOData->favicon);
         }
+    }
 
-        return $SEOData;
+    protected function isAbsoluteUrl(string $value): bool
+    {
+        return filter_var(str_replace(' ', '%20', $value), FILTER_VALIDATE_URL) !== false;
     }
 
     protected function inferTitleFromUrl(string $url): string

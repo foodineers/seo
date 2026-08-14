@@ -1,26 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Foodieneers\Laravel\SEO\Tags;
 
 use Foodieneers\Laravel\SEO\Support\LinkTag;
-use Foodieneers\Laravel\SEO\Support\RenderableCollection;
 use Foodieneers\Laravel\SEO\Support\SEOData;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Support\Collection;
 
-/** @phpstan-consistent-constructor */
-class CanonicalTag extends Collection implements Renderable
+class CanonicalTag extends LinkTag
 {
-    use RenderableCollection;
-
-    public static function initialize(?SEOData $SEOData = null): static
+    public static function initialize(?SEOData $SEOData = null): ?LinkTag
     {
-        $collection = new static;
-
-        if (config('seo.canonical_link')) {
-            $collection->push(new LinkTag('canonical', $SEOData->canonical_url ?? $SEOData->url));
+        if (! config('seo.canonical_link')) {
+            return null;
         }
 
-        return $collection;
+        return new LinkTag('canonical', $SEOData?->canonicalUrl ?? $SEOData?->url ?? '');
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Foodieneers\Laravel\SEO\Support;
 
 use const FILTER_VALIDATE_URL;

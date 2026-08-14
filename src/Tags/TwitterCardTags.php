@@ -58,8 +58,8 @@ class TwitterCardTags extends Collection implements Renderable
             $collection->push(new TwitterCardTag('description', $SEOData->description));
         }
 
-        if ($SEOData->twitter_username && $SEOData->twitter_username !== '@') {
-            $collection->push(new TwitterCardTag('site', $SEOData->twitter_username));
+        if ($SEOData->twitterUsername && $SEOData->twitterUsername !== '@') {
+            $collection->push(new TwitterCardTag('site', $SEOData->twitterUsername));
         }
 
         return $collection;

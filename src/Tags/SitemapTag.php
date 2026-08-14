@@ -2,25 +2,19 @@
 
 namespace Foodieneers\Laravel\SEO\Tags;
 
-use Foodieneers\Laravel\SEO\Support\RenderableCollection;
 use Foodieneers\Laravel\SEO\Support\SEOData;
-use Foodieneers\Laravel\SEO\Support\SitemapTag as SitemapTagSupport;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Support\Collection;
+use Foodieneers\Laravel\SEO\Support\SitemapTag as SupportSitemapTag;
 
-/** @phpstan-consistent-constructor */
-class SitemapTag extends Collection implements Renderable
+class SitemapTag extends SupportSitemapTag
 {
-    use RenderableCollection;
-
-    public static function initialize(?SEOData $SEOData = null): static
+    public static function initialize(?SEOData $SEOData = null): ?static
     {
-        $collection = new static;
+        $sitemap = config('seo.sitemap');
 
-        if ($sitemap = config('seo.sitemap')) {
-            $collection->push(new SitemapTagSupport($sitemap));
+        if (! $sitemap) {
+            return null;
         }
 
-        return $collection;
+        return new static($sitemap);
     }
 }

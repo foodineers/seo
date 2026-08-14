@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
 
     /**
@@ -17,10 +19,6 @@ return [
      * is a great package to generate sitemaps for your application.
      */
     'sitemap' => '/sitemap.xml',
-
-    'logo' => 'images/logo.webp',
-
-    'country' => null,
 
     /**
      * Use this setting to specify whether you want self-referencing `<link rel="canonical" href="$url">` tags to

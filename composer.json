@@ -38,19 +38,35 @@
         }
     },
     "scripts": {
-        "test": "vendor/bin/pest",
-        "test:types": "vendor/bin/phpstan analyse --memory-limit=4G",
+        "post-autoload-dump": "@composer run prepare",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
         "lint": [
-            "vendor/bin/rector",
-            "vendor/bin/pint"
+            "rector",
+            "pint --parallel"
         ],
-        "test-coverage": "vendor/bin/pest --coverage"
+        "test:type-coverage": "pest --type-coverage --min=100",
+        "test:lint": [
+            "pint --parallel --test",
+            "rector --dry-run"
+        ],
+        "test:unit": [
+            "pest --coverage --exactly=100.0"
+        ],
+        "pest": "pest --profile",
+        "test:types": "phpstan --memory-limit=16G",
+        "test": [
+            "@test:unit",
+            "@test:arch",
+            "@test:lint",
+            "@test:types"
+        ]
     },
     "config": {
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
-            "phpstan/extension-installer": true
+            "phpstan/extension-installer": true,
+            "llm/skills": true
         }
     },
     "extra": {
@@ -59,7 +75,7 @@
                 "Foodieneers\\Laravel\\SEO\\LaravelSEOServiceProvider"
             ],
             "aliases": {
-                "SEOManager": "Foodieneers\\Laravel\\SEO\\Facades\\SEOManager"
+                "SEOService": "Foodieneers\\Laravel\\SEO\\Facades\\SEOService"
             }
         }
     },

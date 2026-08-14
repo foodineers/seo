@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Foodieneers\Laravel\SEO\Tests;
 
 use Foodieneers\Laravel\SEO\LaravelSEOServiceProvider;

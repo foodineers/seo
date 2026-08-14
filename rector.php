@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
+use Pest\Rector\Set\PestSetList;
 use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUnusedPrivateMethodRector;
-use Rector\Php70\Rector\StaticCall\StaticCallOnNonStaticToInstanceCallRector;
+use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
 use Rector\Privatization\Rector\ClassMethod\PrivatizeFinalClassMethodRector;
 use Rector\Privatization\Rector\Property\PrivatizeFinalClassPropertyRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddVoidReturnTypeWhereNoReturnRector;
@@ -15,6 +16,9 @@ use RectorLaravel\Set\LaravelSetProvider;
 
 return RectorConfig::configure()
     ->withPhpVersion(PhpVersion::PHP_85)
+    ->withSets([
+        //   PestSetList::CODING_STYLE,
+    ])
     ->withSetProviders(LaravelSetProvider::class)
     ->withSets([
         LaravelSetList::LARAVEL_ARRAYACCESS_TO_METHOD_CALL,
@@ -33,7 +37,7 @@ return RectorConfig::configure()
     )
     ->withComposerBased(laravel: true)
     ->withCache(
-        cacheDirectory: '/storage/tmp/rector',
+        cacheDirectory: 'build/rector',
         cacheClass: FileCacheStorage::class,
     )
     ->withPaths([
@@ -42,10 +46,12 @@ return RectorConfig::configure()
         __DIR__ . '/tests',
     ])
     ->withSkip([
-        StaticCallOnNonStaticToInstanceCallRector::class,
+        AddOverrideAttributeToOverriddenMethodsRector::class,
         RemoveUnusedPrivateMethodRector::class,
         PrivatizeFinalClassMethodRector::class,
-        PrivatizeFinalClassPropertyRector::class,
+        PrivatizeFinalClassPropertyRector::class => [
+            __DIR__ . '/app/Models/*',
+        ],
         AddVoidReturnTypeWhereNoReturnRector::class => [
             __DIR__ . '/tests',
         ],

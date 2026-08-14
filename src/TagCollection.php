@@ -23,9 +23,7 @@ class TagCollection extends Collection
 {
     public static function initialize(?SEOData $SEOData = null): static
     {
-        $collection = new static;
-
-        $tags = collect([
+        return (new static([
             RobotsTag::initialize($SEOData),
             CanonicalTag::initialize($SEOData),
             SitemapTag::initialize($SEOData),
@@ -38,12 +36,6 @@ class TagCollection extends Collection
             TwitterCardTags::initialize($SEOData),
             AlternateTags::initialize($SEOData),
             SchemaTagCollection::initialize($SEOData),
-        ])->filter(fn (?Renderable $item): bool => $item instanceof Renderable);
-
-        foreach ($tags as $tag) {
-            $collection->push($tag);
-        }
-
-        return $collection;
+        ]))->filter(fn (?Renderable $item): bool => $item instanceof Renderable);
     }
 }

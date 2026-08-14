@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Foodieneers\Laravel\SEO\Tags;
 
 use Foodieneers\Laravel\SEO\Support\SEOData;

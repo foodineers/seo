@@ -50,20 +50,20 @@ class OpenGraphTags extends Collection implements Renderable
 
         $collection->push(new OpenGraphTag('url', $SEOData->url));
 
-        if ($SEOData->site_name) {
-            $collection->push(new OpenGraphTag('site_name', $SEOData->site_name));
+        if ($SEOData->siteName) {
+            $collection->push(new OpenGraphTag('site_name', $SEOData->siteName));
         }
 
         if ($SEOData->type) {
             $collection->push(new OpenGraphTag('type', $SEOData->type));
         }
 
-        if ($SEOData->published_at && $SEOData->type === 'article') {
-            $collection->push(new MetaContentTag('article:published_at', $SEOData->published_at->toIso8601String()));
+        if ($SEOData->publishedAt && $SEOData->type === 'article') {
+            $collection->push(new MetaContentTag('article:published_at', $SEOData->publishedAt->toIso8601String()));
         }
 
-        if ($SEOData->modified_at && $SEOData->type === 'article') {
-            $collection->push(new MetaContentTag('article:modified_at', $SEOData->modified_at->toIso8601String()));
+        if ($SEOData->modifiedAt && $SEOData->type === 'article') {
+            $collection->push(new MetaContentTag('article:modified_at', $SEOData->modifiedAt->toIso8601String()));
         }
 
         if ($SEOData->section && $SEOData->type === 'article') {

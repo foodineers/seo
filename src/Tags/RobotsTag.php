@@ -3,28 +3,18 @@
 namespace Foodieneers\Laravel\SEO\Tags;
 
 use Foodieneers\Laravel\SEO\Support\MetaTag;
-use Foodieneers\Laravel\SEO\Support\RenderableCollection;
 use Foodieneers\Laravel\SEO\Support\SEOData;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Support\Collection;
 
-/** @phpstan-consistent-constructor */
-class RobotsTag extends Collection implements Renderable
+class RobotsTag extends MetaTag
 {
-    use RenderableCollection;
-
-    public static function initialize(?SEOData $SEOData = null): static
+    public static function initialize(?SEOData $SEOData = null): MetaTag
     {
-        $collection = new static;
-
         $robotsContent = config('seo.robots.default');
 
         if (! config('seo.robots.force_default')) {
-            $robotsContent = $SEOData->robots ?? $robotsContent;
+            $robotsContent = $SEOData?->robots ?? $robotsContent;
         }
 
-        $collection->push(new MetaTag('robots', $robotsContent));
-
-        return $collection;
+        return new MetaTag('robots', $robotsContent);
     }
 }
