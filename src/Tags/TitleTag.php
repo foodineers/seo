@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Foodieneers\Laravel\SEO\Tags;
+namespace Foodieneers\SEO\Tags;
 
-use Foodieneers\Laravel\SEO\Support\SEOData;
-use Foodieneers\Laravel\SEO\Support\Tag;
+use Foodieneers\SEO\Support\SEOData;
+use Foodieneers\SEO\Support\Tag;
 
 /** @phpstan-consistent-constructor */
 class TitleTag extends Tag

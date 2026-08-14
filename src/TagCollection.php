@@ -1,20 +1,20 @@
 <?php
 
-namespace Foodieneers\Laravel\SEO;
+namespace Foodieneers\SEO;
 
-use Foodieneers\Laravel\SEO\Support\SchemaTagCollection;
-use Foodieneers\Laravel\SEO\Support\SEOData;
-use Foodieneers\Laravel\SEO\Tags\AlternateTags;
-use Foodieneers\Laravel\SEO\Tags\AuthorTag;
-use Foodieneers\Laravel\SEO\Tags\CanonicalTag;
-use Foodieneers\Laravel\SEO\Tags\DescriptionTag;
-use Foodieneers\Laravel\SEO\Tags\FaviconTag;
-use Foodieneers\Laravel\SEO\Tags\ImageTag;
-use Foodieneers\Laravel\SEO\Tags\OpenGraphTags;
-use Foodieneers\Laravel\SEO\Tags\RobotsTag;
-use Foodieneers\Laravel\SEO\Tags\SitemapTag;
-use Foodieneers\Laravel\SEO\Tags\TitleTag;
-use Foodieneers\Laravel\SEO\Tags\TwitterCardTags;
+use Foodieneers\SEO\Support\SchemaTagCollection;
+use Foodieneers\SEO\Support\SEOData;
+use Foodieneers\SEO\Tags\AlternateTags;
+use Foodieneers\SEO\Tags\AuthorTag;
+use Foodieneers\SEO\Tags\CanonicalTag;
+use Foodieneers\SEO\Tags\DescriptionTag;
+use Foodieneers\SEO\Tags\FaviconTag;
+use Foodieneers\SEO\Tags\ImageTag;
+use Foodieneers\SEO\Tags\OpenGraphTags;
+use Foodieneers\SEO\Tags\RobotsTag;
+use Foodieneers\SEO\Tags\SitemapTag;
+use Foodieneers\SEO\Tags\TitleTag;
+use Foodieneers\SEO\Tags\TwitterCardTags;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
 

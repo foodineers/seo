@@ -1,8 +1,8 @@
 <?php
 
-namespace Foodieneers\Laravel\SEO;
+namespace Foodieneers\SEO;
 
-use Foodieneers\Laravel\SEO\Support\SEOData;
+use Foodieneers\SEO\Support\SEOData;
 use Stringable;
 
 class SEOService implements Stringable

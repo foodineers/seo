@@ -1,10 +1,10 @@
 <?php
 
-namespace Foodieneers\Laravel\SEO;
+namespace Foodieneers\SEO;
 
 use const FILTER_VALIDATE_URL;
 
-use Foodieneers\Laravel\SEO\Support\SEOData;
+use Foodieneers\SEO\Support\SEOData;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Str;
 use Stringable;

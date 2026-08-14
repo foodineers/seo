@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `laravel-seo` will be documented in this file.
+All notable changes to `seo` will be documented in this file.
 
 ## 1.7.3 - 2026-01-15
 

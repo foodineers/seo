@@ -1,10 +1,10 @@
 <?php
 
-namespace Foodieneers\Laravel\SEO\Tags;
+namespace Foodieneers\SEO\Tags;
 
-use Foodieneers\Laravel\SEO\Support\AlternateTag;
-use Foodieneers\Laravel\SEO\Support\RenderableCollection;
-use Foodieneers\Laravel\SEO\Support\SEOData;
+use Foodieneers\SEO\Support\AlternateTag;
+use Foodieneers\SEO\Support\RenderableCollection;
+use Foodieneers\SEO\Support\SEOData;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
 

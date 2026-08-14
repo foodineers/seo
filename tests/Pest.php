@@ -1,8 +1,8 @@
 <?php
 
-use Foodieneers\Laravel\SEO\Support\SEOData;
-use Foodieneers\Laravel\SEO\TagManager;
-use Foodieneers\Laravel\SEO\Tests\TestCase;
+use Foodieneers\SEO\Support\SEOData;
+use Foodieneers\SEO\TagManager;
+use Foodieneers\SEO\Tests\TestCase;
 
 uses(TestCase::class)
     ->in(__DIR__);

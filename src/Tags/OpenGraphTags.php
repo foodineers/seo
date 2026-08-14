@@ -1,12 +1,12 @@
 <?php
 
-namespace Foodieneers\Laravel\SEO\Tags;
+namespace Foodieneers\SEO\Tags;
 
-use Foodieneers\Laravel\SEO\Support\ImageMeta;
-use Foodieneers\Laravel\SEO\Support\MetaContentTag;
-use Foodieneers\Laravel\SEO\Support\OpenGraphTag;
-use Foodieneers\Laravel\SEO\Support\RenderableCollection;
-use Foodieneers\Laravel\SEO\Support\SEOData;
+use Foodieneers\SEO\Support\ImageMeta;
+use Foodieneers\SEO\Support\MetaContentTag;
+use Foodieneers\SEO\Support\OpenGraphTag;
+use Foodieneers\SEO\Support\RenderableCollection;
+use Foodieneers\SEO\Support\SEOData;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;

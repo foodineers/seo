@@ -1,9 +1,9 @@
 <?php
 
-namespace Foodieneers\Laravel\SEO\Tags;
+namespace Foodieneers\SEO\Tags;
 
-use Foodieneers\Laravel\SEO\Support\MetaTag;
-use Foodieneers\Laravel\SEO\Support\SEOData;
+use Foodieneers\SEO\Support\MetaTag;
+use Foodieneers\SEO\Support\SEOData;
 
 class RobotsTag extends MetaTag
 {

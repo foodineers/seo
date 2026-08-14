@@ -1,7 +1,7 @@
 <?php
 
-use Foodieneers\Laravel\SEO\Support\SEOData;
-use Foodieneers\Laravel\SEO\TagManager;
+use Foodieneers\SEO\Support\SEOData;
+use Foodieneers\SEO\TagManager;
 
 it('normalizes SEOData with config defaults and inferred title', function (): void {
     config()->set('seo.title.infer_title_from_url', true);

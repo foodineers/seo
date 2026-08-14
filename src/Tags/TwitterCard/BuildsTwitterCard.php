@@ -1,10 +1,10 @@
 <?php
 
-namespace Foodieneers\Laravel\SEO\Tags\TwitterCard;
+namespace Foodieneers\SEO\Tags\TwitterCard;
 
-use Foodieneers\Laravel\SEO\Support\ImageMeta;
-use Foodieneers\Laravel\SEO\Support\SEOData;
-use Foodieneers\Laravel\SEO\Support\TwitterCardTag;
+use Foodieneers\SEO\Support\ImageMeta;
+use Foodieneers\SEO\Support\SEOData;
+use Foodieneers\SEO\Support\TwitterCardTag;
 use Illuminate\Support\HtmlString;
 
 trait BuildsTwitterCard

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Foodieneers\Laravel\SEO\Tests;
+namespace Foodieneers\SEO\Tests;
 
-use Foodieneers\Laravel\SEO\LaravelSEOServiceProvider;
+use Foodieneers\SEO\SEOServiceProvider;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase as Orchestra;
@@ -21,7 +21,7 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app): array
     {
         return [
-            LaravelSEOServiceProvider::class,
+            SEOServiceProvider::class,
         ];
     }
 

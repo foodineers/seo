@@ -1,7 +1,7 @@
 <?php
 
-use Foodieneers\Laravel\SEO\Support\SchemaResolver;
-use Foodieneers\Laravel\SEO\Support\SEOData;
+use Foodieneers\SEO\Support\SchemaResolver;
+use Foodieneers\SEO\Support\SEOData;
 use Spatie\SchemaOrg\Graph;
 use Spatie\SchemaOrg\Schema;
 

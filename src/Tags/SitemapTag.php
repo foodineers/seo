@@ -1,9 +1,9 @@
 <?php
 
-namespace Foodieneers\Laravel\SEO\Tags;
+namespace Foodieneers\SEO\Tags;
 
-use Foodieneers\Laravel\SEO\Support\SEOData;
-use Foodieneers\Laravel\SEO\Support\SitemapTag as SupportSitemapTag;
+use Foodieneers\SEO\Support\SEOData;
+use Foodieneers\SEO\Support\SitemapTag as SupportSitemapTag;
 
 class SitemapTag extends SupportSitemapTag
 {

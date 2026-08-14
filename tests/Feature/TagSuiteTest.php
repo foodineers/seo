@@ -1,12 +1,12 @@
 <?php
 
 use Carbon\CarbonImmutable;
-use Foodieneers\Laravel\SEO\Support\ImageMeta;
-use Foodieneers\Laravel\SEO\Support\SEOData;
-use Foodieneers\Laravel\SEO\Tags\OpenGraphTags;
-use Foodieneers\Laravel\SEO\Tags\TwitterCard\Summary;
-use Foodieneers\Laravel\SEO\Tags\TwitterCard\SummaryLargeImage;
-use Foodieneers\Laravel\SEO\Tags\TwitterCardTags;
+use Foodieneers\SEO\Support\ImageMeta;
+use Foodieneers\SEO\Support\SEOData;
+use Foodieneers\SEO\Tags\OpenGraphTags;
+use Foodieneers\SEO\Tags\TwitterCard\Summary;
+use Foodieneers\SEO\Tags\TwitterCard\SummaryLargeImage;
+use Foodieneers\SEO\Tags\TwitterCardTags;
 
 it('renders title tag without inertia attribute', function (): void {
     $output = renderSeo(new SEOData(

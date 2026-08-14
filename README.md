@@ -66,7 +66,7 @@ class Post extends Model
 Run the following command to install the package:
 
 ```shell
-composer require Foodieneers/laravel-seo
+composer require foodieneers/seo
 ```
 
 Publish the migration and configuration file:
@@ -207,7 +207,7 @@ To really profit from this package, you can **associate an Eloquent model with a
 To associate an Eloquent model with a SEO-model, add the `HasSEO` trait to your model:
 
 ```php
-use Foodieneers\Laravel\SEO\Support\HasSEO;
+use Foodieneers\SEO\Support\HasSEO;
 
 class Post extends Model
 {
@@ -305,7 +305,7 @@ Another option is to pass a SEOData-object directly from the controller to the l
 
 ```php
 use Illuminate\Contracts\View\View;
-use Foodieneers\Laravel\SEO\Support\SEOData;
+use Foodieneers\SEO\Support\SEOData;
 
 class Homepage extends Controller
 {
@@ -342,7 +342,7 @@ Structured data can be added in two ways:
 Let's add the FAQPage schema markup to our website as an example:
 
 ```php
-use Foodieneers\Laravel\SEO\SchemaCollection;
+use Foodieneers\SEO\SchemaCollection;
 
 public function getDynamicSEOData(): SEOData
 {
@@ -384,7 +384,7 @@ In order to automatically and fluently generate `Article` schema markup, use the
 
 ```php
 
-use Foodieneers\Laravel\SEO\SchemaCollection;
+use Foodieneers\SEO\SchemaCollection;
 
 public function getDynamicSEOData(): SEOData
 {
@@ -398,9 +398,9 @@ public function getDynamicSEOData(): SEOData
 This will construct an article schema using all data provided by the `SEOData` object. You can pass a closure to `->addArticle()` method to customize the individual schema markup. This closure will receive an instance of ArticleSchema as its argument. You can an additional author by using the `->addAuthor()` method.
 
 ```php
-use Foodieneers\Laravel\SEO\Schema\ArticleSchema;
-use Foodieneers\Laravel\SEO\SchemaCollection;
-use Foodieneers\Laravel\SEO\Support\SEOData;
+use Foodieneers\SEO\Schema\ArticleSchema;
+use Foodieneers\SEO\SchemaCollection;
+use Foodieneers\SEO\Support\SEOData;
 use Illuminate\Support\Collection;
 
 public function getDynamicSEOData(): SEOData

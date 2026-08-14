@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Foodieneers\Laravel\SEO\Tags\TwitterCard;
+namespace Foodieneers\SEO\Tags\TwitterCard;
 
-use Foodieneers\Laravel\SEO\Support\RenderableCollection;
-use Foodieneers\Laravel\SEO\Support\SEOData;
+use Foodieneers\SEO\Support\RenderableCollection;
+use Foodieneers\SEO\Support\SEOData;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
 

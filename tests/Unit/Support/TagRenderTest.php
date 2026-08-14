@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Foodieneers\Laravel\SEO\Support\TagRender;
+use Foodieneers\SEO\Support\TagRender;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
 

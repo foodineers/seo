@@ -1,6 +1,6 @@
 <?php
 
-namespace Foodieneers\Laravel\SEO\Support;
+namespace Foodieneers\SEO\Support;
 
 use Carbon\CarbonInterface;
 use InvalidArgumentException;

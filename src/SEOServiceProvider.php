@@ -1,12 +1,12 @@
 <?php
 
-namespace Foodieneers\Laravel\SEO;
+namespace Foodieneers\SEO;
 
 use Illuminate\Support\Facades\Blade;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class LaravelSEOServiceProvider extends PackageServiceProvider
+class SEOServiceProvider extends PackageServiceProvider
 {
     public function register(): void
     {
@@ -18,13 +18,13 @@ class LaravelSEOServiceProvider extends PackageServiceProvider
     public function configurePackage(Package $package): void
     {
         $package
-            ->name('laravel-seo')
+            ->name('seo')
             ->hasConfigFile();
     }
 
     public function bootingPackage(): void
     {
-        Blade::directive('seo', fn (?string $expression): string => "<?php app(\Foodieneers\Laravel\SEO\SEOService::class)->setData(new \Foodieneers\Laravel\SEO\Support\SEOData({$expression})); ?>");
-        Blade::directive('seoData', fn (): string => "<?php echo app(\Foodieneers\Laravel\SEO\SEOService::class)->render(); ?>");
+        Blade::directive('seo', fn (?string $expression): string => "<?php app(\Foodieneers\SEO\SEOService::class)->setData(new \Foodieneers\SEO\Support\SEOData({$expression})); ?>");
+        Blade::directive('seoData', fn (): string => "<?php echo app(\Foodieneers\SEO\SEOService::class)->render(); ?>");
     }
 }

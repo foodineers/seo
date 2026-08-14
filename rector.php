@@ -50,7 +50,7 @@ return RectorConfig::configure()
         RemoveUnusedPrivateMethodRector::class,
         PrivatizeFinalClassMethodRector::class,
         PrivatizeFinalClassPropertyRector::class => [
-            __DIR__ . '/app/Models/*',
+            __DIR__ . '/src/Models/*',
         ],
         AddVoidReturnTypeWhereNoReturnRector::class => [
             __DIR__ . '/tests',

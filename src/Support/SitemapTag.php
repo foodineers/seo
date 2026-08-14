@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Foodieneers\Laravel\SEO\Support;
+namespace Foodieneers\SEO\Support;
 
 class SitemapTag extends LinkTag
 {

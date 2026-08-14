@@ -1,10 +1,10 @@
 {
-    "name": "foodieneers/laravel-seo",
+    "name": "foodieneers/seo",
     "description": "A package to handle the SEO in any Laravel application, big or small.",
     "keywords": [
         "Foodieneers",
         "laravel",
-        "laravel-seo"
+        "seo"
     ],
     "homepage": "https://github.com/foodieneers/laravel-seo",
     "license": "MIT",
@@ -29,12 +29,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Foodieneers\\Laravel\\SEO\\": "src"
+            "Foodieneers\\SEO\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Foodieneers\\Laravel\\SEO\\Tests\\": "tests"
+            "Foodieneers\\SEO\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -72,10 +72,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Foodieneers\\Laravel\\SEO\\LaravelSEOServiceProvider"
+                "Foodieneers\\SEO\\SEOServiceProvider"
             ],
             "aliases": {
-                "SEOService": "Foodieneers\\Laravel\\SEO\\Facades\\SEOService"
+                "SEOService": "Foodieneers\\SEO\\Facades\\SEOService"
             }
         }
     },
