@@ -37,7 +37,7 @@ class SEOData
         public ?string $openGraphTitle = null,
         public array $lang = [],
         public array $schema = [],
-        public bool $markAsNoindex = false,
+        public bool $noIndex = false,
     ) {
         if ($this->locale === null) {
             $this->locale = app()->getLocale();

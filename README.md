@@ -283,7 +283,7 @@ You are allowed to only override the properties you want and omit the other prop
 11. `tags` (should be an array with tags. It is used for the OpenGraph article tags)
 12. `schema` (this should be a SchemaCollection instance, where you can configure the JSON-LD structured data schema tags)
 13. `locale` (this should be the locale of the page. By default, this is derived from `app()->getLocale()` and it looks like `en` or `nl`.)
-14. `robots` (should be a string with the content value of the robots meta tag, like `nofollow,noindex`). You can also use the `$SEOData->markAsNoIndex()` to prevent a page from being indexed.
+14. `robots` (should be a string with the content value of the robots meta tag, like `nofollow,noindex`). You can also set `$SEOData->noIndex = true` to prevent a page from being indexed.
 15. `alternates` (should be an array of `AlternateTag`). Will render `<link rel="alternate" ... />` tags.
 
 Finally, you should update your Blade file, so that it can receive your model when generating the tags:

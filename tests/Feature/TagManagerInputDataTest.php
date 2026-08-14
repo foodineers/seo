@@ -25,7 +25,7 @@ it('normalizes SEOData with config defaults and inferred title', function (): vo
 
 it('uses noindex robots when SEOData is marked as noindex', function (): void {
     $manager = resolve(TagManager::class)->for(new SEOData(
-        markAsNoindex: true,
+        noIndex: true,
     ));
 
     expect($manager->SEOData?->robots)->toBe('noindex, nofollow');

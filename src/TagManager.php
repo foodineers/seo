@@ -47,7 +47,7 @@ class TagManager implements Renderable, Stringable
         $SEOData->site_name ??= config('seo.site_name');
         $SEOData->favicon ??= config('seo.favicon');
         $SEOData->locale ??= app()->getLocale();
-        $SEOData->robots = $SEOData->markAsNoindex ? 'noindex, nofollow' : $SEOData->robots;
+        $SEOData->robots = $SEOData->noIndex ? 'noindex, nofollow' : $SEOData->robots;
 
         if ($SEOData->image === null) {
             $SEOData->image = config('seo.image.fallback');

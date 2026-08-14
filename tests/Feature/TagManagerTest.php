@@ -30,7 +30,7 @@ it('infers title from URL when enabled', function (): void {
 it('marks robots as noindex when requested', function (): void {
     $manager = resolve(TagManager::class)->for(new SEOData(
         url: 'https://example.com/private',
-        markAsNoindex: true,
+        noIndex: true,
     ));
 
     expect($manager->SEOData?->robots)->toBe('noindex, nofollow');
