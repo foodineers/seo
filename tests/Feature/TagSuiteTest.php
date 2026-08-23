@@ -80,6 +80,29 @@ it('renders sitemap tag from config', function (): void {
     expect($output)->toContain('<link rel="sitemap" title="Sitemap" href="/sitemap.xml" type="application/xml">');
 });
 
+it('skips sitemap tag when config is empty', function (): void {
+    config()->set('seo.sitemap');
+
+    $output = renderSeo(new SEOData(
+        url: 'https://example.com/post',
+    ));
+
+    expect($output)->not->toContain('rel="sitemap"');
+});
+
+it('skips author and favicon tags when values are empty', function (): void {
+    config()->set('seo.author.fallback');
+    config()->set('seo.favicon');
+
+    $output = renderSeo(new SEOData(
+        url: 'https://example.com/post',
+    ));
+
+    expect($output)
+        ->not->toContain('name="author"')
+        ->not->toContain('rel="shortcut icon"');
+});
+
 it('renders image and favicon tags and resolves relative paths', function (): void {
     $output = renderSeo(new SEOData(
         image: '/images/social.jpg',
@@ -202,6 +225,24 @@ it('renders twitter card tags with large image card when ratio is wide', functio
     ))->render();
 
     expect($output)->toContain('<meta name="twitter:card" content="summary_large_image">');
+});
+
+it('uses summary_large_image for remote images without imageMeta', function (): void {
+    $output = TwitterCardTags::initialize(new SEOData(
+        title: 'Remote image title',
+        image: 'https://cdn.example.com/cover.jpg',
+    ))->render();
+
+    expect($output)->toContain('<meta name="twitter:card" content="summary_large_image">');
+});
+
+it('prefers openGraphTitle for twitter title', function (): void {
+    $output = TwitterCardTags::initialize(new SEOData(
+        title: 'Default title',
+        openGraphTitle: 'Share title',
+    ))->render();
+
+    expect($output)->toContain('<meta name="twitter:title" content="Share title">');
 });
 
 it('initializes summary twitter card only for supported dimensions', function (): void {

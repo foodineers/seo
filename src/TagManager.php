@@ -104,8 +104,6 @@ final class TagManager implements Renderable, Stringable
             return 'Home';
         }
 
-        return $lastSegment
-            ->headline()
-            ->whenEmpty(fn (Stringable $str): string => 'Home');
+        return $lastSegment->headline()->toString() ?: 'Home';
     }
 }
