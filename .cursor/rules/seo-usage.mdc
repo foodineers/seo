@@ -1,0 +1,71 @@
+---
+description: How to set and render SEO data (Blade, PHP, recipes)
+alwaysApply: true
+---
+
+# Using SEO data
+
+## Blade (preferred)
+
+`@seo(...)` → `new SEOData(...)` + `SEOService::setData()`. `@seoData` → `render()`.
+
+```blade
+<head>
+    @seo(
+        title: $page->title,
+        description: $page->excerpt,
+        image: $page->socialImagePath,
+        type: 'article',
+        publishedAt: $page->published_at,
+        modifiedAt: $page->updated_at,
+        section: $page->category?->name,
+        tags: $page->tagNames,
+        canonicalUrl: $page->canonicalUrl,
+        lang: $page->hreflangMap,
+        schema: [$page->schemaOrgObject],
+    )
+    @seoData
+</head>
+```
+
+- Always pair `@seo` with `@seoData` in the same head.
+- `@seo` args go **inside** `new SEOData(...)` — named ctor args only. `@seo($data)` is wrong; use `SEOService::setData($data)` in PHP.
+- Do not duplicate `<title>` / meta the package already emits.
+
+## PHP
+
+```php
+SEOService::setData(new SEOData(title: 'Home', description: '...'));
+echo SEOService::render();
+
+// Tests / non-Blade:
+resolve(TagManager::class)->for(new SEOData(...))->render();
+```
+
+No data set → only `<title>{site_name}</title>` + `noindex, nofollow, noarchive`. Intentional; do not invent titles.
+
+## Recipes
+
+```php
+// Minimal
+new SEOData(title: 'Contact', description: 'Get in touch');
+
+// Draft
+new SEOData(title: $draft->title, noindex: true);
+
+// Article + hreflang + schema
+new SEOData(
+    title: $post->title,
+    openGraphTitle: $post->socialTitle,
+    description: $post->excerpt,
+    image: $post->coverPath,
+    type: 'article',
+    publishedAt: $post->published_at,
+    modifiedAt: $post->updated_at,
+    section: $post->category?->name,
+    tags: $post->tags->pluck('name')->all(),
+    canonicalUrl: $post->canonical_url,
+    lang: $post->hreflangUrls,
+    schema: [Schema::fAQPage()->mainEntity(/* ... */)],
+);
+```

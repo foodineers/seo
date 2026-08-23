@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Foodieneers\SEO\Support;
+namespace Foodineers\SEO\Support;
 
-class AlternateTag extends LinkTag
+final class AlternateTag extends LinkTag
 {
     public function __construct(
         string $hreflang,

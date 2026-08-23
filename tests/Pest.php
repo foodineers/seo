@@ -1,11 +1,12 @@
 <?php
 
-use Foodieneers\SEO\Support\SEOData;
-use Foodieneers\SEO\TagManager;
-use Foodieneers\SEO\Tests\TestCase;
+declare(strict_types=1);
 
-uses(TestCase::class)
-    ->in(__DIR__);
+use Foodineers\SEO\Support\SEOData;
+use Foodineers\SEO\TagManager;
+use Foodineers\SEO\Tests\TestCase;
+
+pest()->extend(TestCase::class)->in(__DIR__);
 
 function renderSeo(SEOData $input): string
 {

@@ -1,15 +1,17 @@
 <?php
 
-namespace Foodieneers\SEO\Tags;
+declare(strict_types=1);
 
-use Foodieneers\SEO\Support\AlternateTag;
-use Foodieneers\SEO\Support\RenderableCollection;
-use Foodieneers\SEO\Support\SEOData;
+namespace Foodineers\SEO\Tags;
+
+use Foodineers\SEO\Support\AlternateTag;
+use Foodineers\SEO\Support\RenderableCollection;
+use Foodineers\SEO\Support\SEOData;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
 
 /** @phpstan-consistent-constructor */
-class AlternateTags extends Collection implements Renderable
+final class AlternateTags extends Collection implements Renderable
 {
     use RenderableCollection;
 
@@ -24,6 +26,6 @@ class AlternateTags extends Collection implements Renderable
             ->values()
             ->all();
 
-        return new static($alternates);
+        return new self($alternates);
     }
 }

@@ -6,9 +6,7 @@ use Pest\Rector\Set\PestSetList;
 use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUnusedPrivateMethodRector;
-use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
 use Rector\Privatization\Rector\ClassMethod\PrivatizeFinalClassMethodRector;
-use Rector\Privatization\Rector\Property\PrivatizeFinalClassPropertyRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddVoidReturnTypeWhereNoReturnRector;
 use Rector\ValueObject\PhpVersion;
 use RectorLaravel\Set\LaravelSetList;
@@ -16,11 +14,9 @@ use RectorLaravel\Set\LaravelSetProvider;
 
 return RectorConfig::configure()
     ->withPhpVersion(PhpVersion::PHP_85)
-    ->withSets([
-        //   PestSetList::CODING_STYLE,
-    ])
     ->withSetProviders(LaravelSetProvider::class)
     ->withSets([
+        PestSetList::CODING_STYLE,
         LaravelSetList::LARAVEL_ARRAYACCESS_TO_METHOD_CALL,
         LaravelSetList::LARAVEL_ARRAY_STR_FUNCTION_TO_STATIC_CALL,
         LaravelSetList::LARAVEL_CODE_QUALITY,
@@ -41,19 +37,15 @@ return RectorConfig::configure()
         cacheClass: FileCacheStorage::class,
     )
     ->withPaths([
-        __DIR__ . '/src',
-        __DIR__ . '/config',
-        __DIR__ . '/tests',
+        __DIR__.'/src',
+        __DIR__.'/config',
+        __DIR__.'/tests',
     ])
     ->withSkip([
-        AddOverrideAttributeToOverriddenMethodsRector::class,
         RemoveUnusedPrivateMethodRector::class,
         PrivatizeFinalClassMethodRector::class,
-        PrivatizeFinalClassPropertyRector::class => [
-            __DIR__ . '/src/Models/*',
-        ],
         AddVoidReturnTypeWhereNoReturnRector::class => [
-            __DIR__ . '/tests',
+            __DIR__.'/tests',
         ],
     ])
     ->withPreparedSets(

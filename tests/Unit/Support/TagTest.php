@@ -1,6 +1,8 @@
 <?php
 
-use Foodieneers\SEO\Support\Tag;
+declare(strict_types=1);
+
+use Foodineers\SEO\Support\Tag;
 
 it('orders tag attributes', function (): void {
     $tag = new class extends Tag

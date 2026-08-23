@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Foodieneers\SEO\Tags\TwitterCard;
+namespace Foodineers\SEO\Tags\TwitterCard;
 
-use Foodieneers\SEO\Support\RenderableCollection;
-use Foodieneers\SEO\Support\SEOData;
+use Foodineers\SEO\Support\RenderableCollection;
+use Foodineers\SEO\Support\SEOData;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
 
 /** @phpstan-consistent-constructor */
-class Summary extends Collection implements Renderable
+final class Summary extends Collection implements Renderable
 {
     use BuildsTwitterCard;
     use RenderableCollection;
 
     public static function initialize(SEOData $SEOData): static
     {
-        return static::buildCard($SEOData, 'summary', 144, 144);
+        return self::buildCard($SEOData, 'summary', 144, 144);
     }
 }

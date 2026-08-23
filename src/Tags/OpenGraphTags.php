@@ -1,24 +1,26 @@
 <?php
 
-namespace Foodieneers\SEO\Tags;
+declare(strict_types=1);
 
-use Foodieneers\SEO\Support\ImageMeta;
-use Foodieneers\SEO\Support\MetaContentTag;
-use Foodieneers\SEO\Support\OpenGraphTag;
-use Foodieneers\SEO\Support\RenderableCollection;
-use Foodieneers\SEO\Support\SEOData;
+namespace Foodineers\SEO\Tags;
+
+use Foodineers\SEO\Support\ImageMeta;
+use Foodineers\SEO\Support\MetaContentTag;
+use Foodineers\SEO\Support\OpenGraphTag;
+use Foodineers\SEO\Support\RenderableCollection;
+use Foodineers\SEO\Support\SEOData;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
 
 /** @phpstan-consistent-constructor */
-class OpenGraphTags extends Collection implements Renderable
+final class OpenGraphTags extends Collection implements Renderable
 {
     use RenderableCollection;
 
     public static function initialize(SEOData $SEOData): static
     {
-        $collection = new static;
+        $collection = new self;
 
         if ($SEOData->openGraphTitle) {
             $collection->push(new OpenGraphTag('title', $SEOData->openGraphTitle));

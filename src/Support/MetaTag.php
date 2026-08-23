@@ -2,17 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Foodieneers\SEO\Support;
+namespace Foodineers\SEO\Support;
 
 use Illuminate\Support\HtmlString;
+use Override;
 
-class MetaTag extends Tag
+final class MetaTag extends Tag
 {
+    #[Override]
     public string $tag = 'meta';
 
     public function __construct(
         string $name,
-        string | HtmlString $content,
+        string|HtmlString $content,
     ) {
         $this->attributes['name'] = $name;
         $this->attributes['content'] = $content;

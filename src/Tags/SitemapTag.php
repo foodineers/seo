@@ -1,11 +1,13 @@
 <?php
 
-namespace Foodieneers\SEO\Tags;
+declare(strict_types=1);
 
-use Foodieneers\SEO\Support\SEOData;
-use Foodieneers\SEO\Support\SitemapTag as SupportSitemapTag;
+namespace Foodineers\SEO\Tags;
 
-class SitemapTag extends SupportSitemapTag
+use Foodineers\SEO\Support\SEOData;
+use Foodineers\SEO\Support\SitemapTag as SupportSitemapTag;
+
+final class SitemapTag extends SupportSitemapTag
 {
     public static function initialize(?SEOData $SEOData = null): ?static
     {
@@ -15,6 +17,6 @@ class SitemapTag extends SupportSitemapTag
             return null;
         }
 
-        return new static($sitemap);
+        return new self($sitemap);
     }
 }

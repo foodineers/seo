@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Foodieneers\SEO\Support;
+namespace Foodineers\SEO\Support;
 
 use const FILTER_VALIDATE_URL;
 
 use Exception;
 
-class ImageMeta
+final class ImageMeta
 {
     public ?int $width = null;
 

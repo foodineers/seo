@@ -2,10 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Foodieneers\SEO\Support;
+namespace Foodineers\SEO\Support;
 
-class MetaContentTag extends Tag
+use Override;
+
+final class MetaContentTag extends Tag
 {
+    #[Override]
     public string $tag = 'meta';
 
     public function __construct(

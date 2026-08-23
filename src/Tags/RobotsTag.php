@@ -1,11 +1,13 @@
 <?php
 
-namespace Foodieneers\SEO\Tags;
+declare(strict_types=1);
 
-use Foodieneers\SEO\Support\MetaTag;
-use Foodieneers\SEO\Support\SEOData;
+namespace Foodineers\SEO\Tags;
 
-class RobotsTag extends MetaTag
+use Foodineers\SEO\Support\MetaTag;
+use Foodineers\SEO\Support\SEOData;
+
+final class RobotsTag extends MetaTag
 {
     public static function initialize(?SEOData $SEOData = null): MetaTag
     {

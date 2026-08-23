@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Foodieneers\SEO\Tags;
+namespace Foodineers\SEO\Tags;
 
-use Foodieneers\SEO\Support\LinkTag;
-use Foodieneers\SEO\Support\SEOData;
+use Foodineers\SEO\Support\LinkTag;
+use Foodineers\SEO\Support\SEOData;
 
-class CanonicalTag extends LinkTag
+final class CanonicalTag extends LinkTag
 {
     public static function initialize(?SEOData $SEOData = null): ?LinkTag
     {

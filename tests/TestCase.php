@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Foodieneers\SEO\Tests;
+namespace Foodineers\SEO\Tests;
 
-use Foodieneers\SEO\SEOServiceProvider;
+use Foodineers\SEO\SEOServiceProvider;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase as Orchestra;

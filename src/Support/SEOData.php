@@ -1,13 +1,15 @@
 <?php
 
-namespace Foodieneers\SEO\Support;
+declare(strict_types=1);
+
+namespace Foodineers\SEO\Support;
 
 use Carbon\CarbonInterface;
 use InvalidArgumentException;
 use Spatie\SchemaOrg\BaseType;
 use Spatie\SchemaOrg\Graph;
 
-class SEOData
+final class SEOData
 {
     /**
      * @param  array<string, string>  $lang
@@ -44,16 +46,6 @@ class SEOData
         $this->assertValidSchema($this->schema);
     }
 
-    /**
-     * @param  array<int, mixed>  $schema
-     */
-    protected function assertValidSchema(array $schema): void
-    {
-        foreach ($schema as $item) {
-            throw_if(! $item instanceof BaseType && ! $item instanceof Graph, InvalidArgumentException::class, 'Schema must be a BaseType or Graph.');
-        }
-    }
-
     public function imageMeta(): ?ImageMeta
     {
         if ($this->image) {
@@ -61,5 +53,15 @@ class SEOData
         }
 
         return null;
+    }
+
+    /**
+     * @param  array<int, mixed>  $schema
+     */
+    private function assertValidSchema(array $schema): void
+    {
+        foreach ($schema as $item) {
+            throw_if(! $item instanceof BaseType && ! $item instanceof Graph, InvalidArgumentException::class, 'Schema must be a BaseType or Graph.');
+        }
     }
 }

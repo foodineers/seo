@@ -2,20 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Foodieneers\SEO\Tags;
+namespace Foodineers\SEO\Tags;
 
-use Foodieneers\SEO\Support\SEOData;
-use Foodieneers\SEO\Support\Tag;
+use Foodineers\SEO\Support\SEOData;
+use Foodineers\SEO\Support\Tag;
+use Override;
 
 /** @phpstan-consistent-constructor */
-class TitleTag extends Tag
+final class TitleTag extends Tag
 {
+    #[Override]
     public string $tag = 'title';
 
     public function __construct(
         string $inner,
     ) {
-        $this->inner = trim($inner);
+        $this->inner = mb_trim($inner);
     }
 
     public static function initialize(?SEOData $SEOData): ?Tag
@@ -26,7 +28,7 @@ class TitleTag extends Tag
             return null;
         }
 
-        return new static(
+        return new self(
             inner: $title,
         );
     }

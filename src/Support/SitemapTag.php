@@ -2,10 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Foodieneers\SEO\Support;
+namespace Foodineers\SEO\Support;
 
-class SitemapTag extends LinkTag
+use Override;
+
+final class SitemapTag extends LinkTag
 {
+    #[Override]
     public array $attributes = [
         'type' => 'application/xml',
         'rel' => 'sitemap',

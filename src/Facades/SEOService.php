@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Foodieneers\SEO\Facades;
+namespace Foodineers\SEO\Facades;
 
-use Foodieneers\SEO\Support\SEOData;
+use Foodineers\SEO\Support\SEOData;
 use Illuminate\Support\Facades\Facade;
 
 /**
@@ -12,10 +12,10 @@ use Illuminate\Support\Facades\Facade;
  * @method static bool hasData()
  * @method static string render()
  */
-class SEOService extends Facade
+final class SEOService extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return \Foodieneers\SEO\SEOService::class;
+        return \Foodineers\SEO\SEOService::class;
     }
 }

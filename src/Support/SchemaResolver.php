@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Foodieneers\SEO\Support;
+namespace Foodineers\SEO\Support;
 
 use Spatie\SchemaOrg\Graph;
 
-class SchemaResolver
+final class SchemaResolver
 {
     /**
      * @return list<array<string, mixed>>|null

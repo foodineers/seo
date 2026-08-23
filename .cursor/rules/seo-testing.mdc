@@ -1,0 +1,25 @@
+---
+description: Pest coverage and how to extend SEOData / tags
+alwaysApply: true
+---
+
+# Testing and package edits
+
+- Pest + Orchestra Testbench. Helper: `renderSeo(SEOData $input)` in `tests/Pest.php`.
+- Suites: `TagManagerInputDataTest` (normalize), `TagSuiteTest` (HTML), `SchemaSuiteTest` (JSON-LD), `BladeDirectivesTest` (`@seo`/`@seoData`), `SEOServiceTest` (singleton / empty fallback).
+- `composer test:unit` expects 100% coverage. Run relevant Pest filters after behavior changes.
+
+```php
+$output = renderSeo(new SEOData(title: 'My title', url: 'https://example.com/post'));
+expect($output)->toContain('<title>My title</title>');
+```
+
+## Extending the package
+
+1. Add a field to `SEOData` only if cross-cutting.
+2. Wire it in the relevant `Tags/*` class (`initialize` maps fields → markup).
+3. Document it in `.cursor/rules/seo-data.mdc`.
+4. Add Pest for render + normalize edge cases.
+5. Keep examples aligned with real ctor + `@seo` / `@seoData` (not outdated README APIs).
+
+Preserve: `RenderableCollection` for tag collections; escape via existing `Tag`/`MetaTag` helpers; named ctor args / current PHP style.

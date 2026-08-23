@@ -1,13 +1,15 @@
 <?php
 
-namespace Foodieneers\SEO\Tags;
+declare(strict_types=1);
 
-use Foodieneers\SEO\Support\LinkTag;
-use Foodieneers\SEO\Support\SEOData;
+namespace Foodineers\SEO\Tags;
+
+use Foodineers\SEO\Support\LinkTag;
+use Foodineers\SEO\Support\SEOData;
 use Illuminate\Support\Collection;
 
 /** @phpstan-consistent-constructor */
-class FaviconTag extends LinkTag
+final class FaviconTag extends LinkTag
 {
     public static function initialize(?SEOData $SEOData): ?static
     {
@@ -17,7 +19,7 @@ class FaviconTag extends LinkTag
             return null;
         }
 
-        return new static(
+        return new self(
             rel: 'shortcut icon',
             href: $favicon,
         );

@@ -2,10 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Foodieneers\SEO\Support;
+namespace Foodineers\SEO\Support;
 
-class LinkTag extends Tag
+use Override;
+
+final class LinkTag extends Tag
 {
+    #[Override]
     public string $tag = 'link';
 
     public function __construct(

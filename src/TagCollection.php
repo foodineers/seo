@@ -1,29 +1,31 @@
 <?php
 
-namespace Foodieneers\SEO;
+declare(strict_types=1);
 
-use Foodieneers\SEO\Support\SchemaTagCollection;
-use Foodieneers\SEO\Support\SEOData;
-use Foodieneers\SEO\Tags\AlternateTags;
-use Foodieneers\SEO\Tags\AuthorTag;
-use Foodieneers\SEO\Tags\CanonicalTag;
-use Foodieneers\SEO\Tags\DescriptionTag;
-use Foodieneers\SEO\Tags\FaviconTag;
-use Foodieneers\SEO\Tags\ImageTag;
-use Foodieneers\SEO\Tags\OpenGraphTags;
-use Foodieneers\SEO\Tags\RobotsTag;
-use Foodieneers\SEO\Tags\SitemapTag;
-use Foodieneers\SEO\Tags\TitleTag;
-use Foodieneers\SEO\Tags\TwitterCardTags;
+namespace Foodineers\SEO;
+
+use Foodineers\SEO\Support\SchemaTagCollection;
+use Foodineers\SEO\Support\SEOData;
+use Foodineers\SEO\Tags\AlternateTags;
+use Foodineers\SEO\Tags\AuthorTag;
+use Foodineers\SEO\Tags\CanonicalTag;
+use Foodineers\SEO\Tags\DescriptionTag;
+use Foodineers\SEO\Tags\FaviconTag;
+use Foodineers\SEO\Tags\ImageTag;
+use Foodineers\SEO\Tags\OpenGraphTags;
+use Foodineers\SEO\Tags\RobotsTag;
+use Foodineers\SEO\Tags\SitemapTag;
+use Foodineers\SEO\Tags\TitleTag;
+use Foodineers\SEO\Tags\TwitterCardTags;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
 
 /** @phpstan-consistent-constructor */
-class TagCollection extends Collection
+final class TagCollection extends Collection
 {
     public static function initialize(?SEOData $SEOData = null): static
     {
-        return (new static([
+        return new self([
             RobotsTag::initialize($SEOData),
             CanonicalTag::initialize($SEOData),
             SitemapTag::initialize($SEOData),
@@ -36,6 +38,6 @@ class TagCollection extends Collection
             TwitterCardTags::initialize($SEOData),
             AlternateTags::initialize($SEOData),
             SchemaTagCollection::initialize($SEOData),
-        ]))->filter(fn (?Renderable $item): bool => $item instanceof Renderable);
+        ])->filter(fn (?Renderable $item): bool => $item instanceof Renderable);
     }
 }

@@ -1,7 +1,9 @@
 <?php
 
-use Foodieneers\SEO\Support\SEOData;
-use Foodieneers\SEO\TagManager;
+declare(strict_types=1);
+
+use Foodineers\SEO\Support\SEOData;
+use Foodineers\SEO\TagManager;
 
 it('builds and renders tags from SEOData', function (): void {
     $output = resolve(TagManager::class)

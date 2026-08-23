@@ -1,13 +1,20 @@
 <?php
 
-namespace Foodieneers\SEO;
+declare(strict_types=1);
 
-use Foodieneers\SEO\Support\SEOData;
+namespace Foodineers\SEO;
+
+use Foodineers\SEO\Support\SEOData;
 use Stringable;
 
-class SEOService implements Stringable
+final class SEOService implements Stringable
 {
     private ?SEOData $data = null;
+
+    public function __toString(): string
+    {
+        return $this->render();
+    }
 
     public function setData(SEOData $data): void
     {
@@ -33,10 +40,5 @@ class SEOService implements Stringable
             '<title>%s</title><meta name="robots" content="noindex, nofollow, noarchive">',
             e($title)
         );
-    }
-
-    public function __toString(): string
-    {
-        return $this->render();
     }
 }

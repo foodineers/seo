@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 use Carbon\CarbonImmutable;
-use Foodieneers\SEO\Support\ImageMeta;
-use Foodieneers\SEO\Support\SEOData;
-use Foodieneers\SEO\Tags\OpenGraphTags;
-use Foodieneers\SEO\Tags\TwitterCard\Summary;
-use Foodieneers\SEO\Tags\TwitterCard\SummaryLargeImage;
-use Foodieneers\SEO\Tags\TwitterCardTags;
+use Foodineers\SEO\Support\ImageMeta;
+use Foodineers\SEO\Support\SEOData;
+use Foodineers\SEO\Tags\OpenGraphTags;
+use Foodineers\SEO\Tags\TwitterCard\Summary;
+use Foodineers\SEO\Tags\TwitterCard\SummaryLargeImage;
+use Foodineers\SEO\Tags\TwitterCardTags;
 
 it('renders title tag without inertia attribute', function (): void {
     $output = renderSeo(new SEOData(
@@ -86,8 +88,8 @@ it('renders image and favicon tags and resolves relative paths', function (): vo
     ));
 
     expect($output)
-        ->toContain('<meta name="image" content="' . secure_url('/images/social.jpg') . '">')
-        ->toContain('<link href="' . secure_url('/favicon-test.ico') . '" rel="shortcut icon">');
+        ->toContain('<meta name="image" content="'.secure_url('/images/social.jpg').'">')
+        ->toContain('<link href="'.secure_url('/favicon-test.ico').'" rel="shortcut icon">');
 });
 
 it('renders no alternate tags when lang is empty', function (): void {
@@ -160,8 +162,8 @@ it('renders OpenGraph tags including article metadata', function (): void {
         ->toContain('<meta property="og:url" content="https://example.com/post">')
         ->toContain('<meta property="og:site_name" content="Example">')
         ->toContain('<meta property="og:type" content="article">')
-        ->toContain('<meta property="article:published_at" content="' . $published->toIso8601String() . '">')
-        ->toContain('<meta property="article:modified_at" content="' . $modified->toIso8601String() . '">')
+        ->toContain('<meta property="article:published_at" content="'.$published->toIso8601String().'">')
+        ->toContain('<meta property="article:modified_at" content="'.$modified->toIso8601String().'">')
         ->toContain('<meta property="article:section" content="News">')
         ->toContain('<meta property="article:tag" content="tag-one">')
         ->toContain('<meta property="article:tag" content="tag-two">');
@@ -226,7 +228,7 @@ it('initializes summary twitter card only for supported dimensions', function ()
         imageMeta: $invalidMeta,
     ));
 
-    expect($invalid)->toHaveCount(0);
+    expect($invalid)->toBeEmpty();
 });
 
 it('initializes large image twitter card only for supported dimensions', function (): void {
@@ -253,5 +255,5 @@ it('initializes large image twitter card only for supported dimensions', functio
         imageMeta: $invalidMeta,
     ));
 
-    expect($invalid)->toHaveCount(0);
+    expect($invalid)->toBeEmpty();
 });

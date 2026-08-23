@@ -1,19 +1,26 @@
 <?php
 
-namespace Foodieneers\SEO\Support;
+declare(strict_types=1);
+
+namespace Foodineers\SEO\Support;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
 use Stringable;
 
-class TagRender implements Renderable, Stringable
+final class TagRender implements Renderable, Stringable
 {
     public function __construct(
         public string $tag,
         public Collection $attributes,
-        public null | string | HtmlString $inner = null,
+        public null|string|HtmlString $inner = null,
     ) {}
+
+    public function __toString(): string
+    {
+        return $this->render();
+    }
 
     public function render(): string
     {
@@ -23,21 +30,16 @@ class TagRender implements Renderable, Stringable
             $attributes .= " {$name}";
 
             if (! is_bool($value)) {
-                $attributes .= '="' . e($value) . '"';
+                $attributes .= '="'.e($value).'"';
             }
         }
 
         $html = "<{$this->tag}{$attributes}>";
 
         if ($this->inner) {
-            $html .= e($this->inner) . "</{$this->tag}>";
+            $html .= e($this->inner)."</{$this->tag}>";
         }
 
         return $html;
-    }
-
-    public function __toString(): string
-    {
-        return $this->render();
     }
 }

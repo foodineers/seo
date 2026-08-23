@@ -1,0 +1,41 @@
+---
+description: SEOData fields, types, and construction rules
+alwaysApply: true
+---
+
+# SEOData contract
+
+Namespace: `Foodineers\SEO\Support\SEOData`. Pass only properties you set; leave the rest null so config fallbacks apply.
+
+| Property | Type | Notes |
+|---|---|---|
+| `title` | `?string` | `<title>`, OG/Twitter unless `openGraphTitle` |
+| `description` | `?string` | Meta + OG + Twitter |
+| `author` | `?string` | Author meta |
+| `image` | `?string` | Public-relative path or absolute URL |
+| `url` | `?string` | Empty → `request()->path()`; then `url()` |
+| `imageMeta` | `?ImageMeta` | Auto from relative `image` during normalize |
+| `publishedAt` / `modifiedAt` | `?CarbonInterface` | OG article dates if `type === 'article'` |
+| `articleBody` | `?string` | On DTO; unused by built-in tags |
+| `section` / `tags` | `?string` / `?array` | OG article fields if `type === 'article'` |
+| `twitterUsername` | `?string` | Config adds leading `@` |
+| `type` | `?string` | Default `'website'`; gates article OG |
+| `siteName` / `favicon` / `locale` | `?string` | Config / `app()->getLocale()` fallbacks |
+| `robots` | `?string` | Overridden by `noindex: true` → `noindex, nofollow` |
+| `canonicalUrl` | `?string` | Else uses normalized `url` |
+| `openGraphTitle` | `?string` | OG/Twitter only; does not change `<title>` |
+| `lang` | `array<string,string>` | `hreflang => href` (not `alternates`) |
+| `schema` | `list<BaseType\|Graph>` | Spatie only; arrays/closures throw |
+| `noindex` | `bool` | Prefer over hand-written robots for drafts |
+
+```php
+new SEOData(
+    title: 'About us',
+    description: 'Who we are',
+    image: '/images/about.jpg',
+    lang: ['en' => 'https://example.com/en/about', 'x-default' => 'https://example.com/about'],
+    schema: [Schema::organization()->name('Example')->url('https://example.com')],
+);
+```
+
+Relative `image`/`favicon` → `secure_url()` after local `ImageMeta` sizing. Absolute URLs stay as-is (no dimension probe).

@@ -1,0 +1,37 @@
+---
+description: TagManager normalization, tag order, schema, and config
+alwaysApply: true
+---
+
+# Normalize → tags → config
+
+## `TagManager::for()` pipeline
+
+1. URL: `$source->url ?: request()->path()` → later `url($url)`.
+2. Title: keep given; if null and `seo.title.infer_title_from_url`, headline last segment (`Home` for empty/`en|fr|de|it|es`).
+3. `??=` from config: description, author, twitter `@username`, siteName, favicon, locale, image.
+4. `noindex` → `robots = 'noindex, nofollow'`.
+5. Relative image → `imageMeta()` then `secure_url`; relative favicon → `secure_url`.
+
+Changing normalize → update `tests/Feature/TagManagerInputDataTest.php`.
+
+## Tag order (`TagCollection`)
+
+1. Robots (`SEOData->robots` unless `seo.robots.force_default`)
+2. Canonical (if `seo.canonical_link`; `canonicalUrl ?? url`)
+3. Sitemap (config only)
+4. Description, Author, Title, Image, Favicon
+5. OpenGraph (article fields only when `type === 'article'`)
+6. Twitter (card from image aspect: ≥~1.91 → `summary_large_image`)
+7. AlternateTags from `lang`
+8. SchemaTagCollection JSON-LD
+
+Skip empty tags; do not force empty markup.
+
+## Schema
+
+Spatie only. Empty → no JSON-LD. One `BaseType` → one script. Multiple `BaseType`s → one `Graph`. `Graph` instances serialize as-is. Do not reintroduce README `SchemaCollection` APIs without implementing + testing them.
+
+## Config (`config/seo.php`)
+
+`site_name`, `sitemap`, `canonical_link`, `robots.default` / `force_default`, `favicon`, `title.infer_title_from_url`, description/image/author `fallback`, `twitter.@username` (no `@`; package adds it). New keys → config + Pest + update these rules.

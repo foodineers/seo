@@ -1,23 +1,25 @@
 <?php
 
-namespace Foodieneers\SEO\Tags;
+declare(strict_types=1);
 
-use Foodieneers\SEO\Support\RenderableCollection;
-use Foodieneers\SEO\Support\SEOData;
-use Foodieneers\SEO\Support\TwitterCardTag;
-use Foodieneers\SEO\Tags\TwitterCard\Summary;
-use Foodieneers\SEO\Tags\TwitterCard\SummaryLargeImage;
+namespace Foodineers\SEO\Tags;
+
+use Foodineers\SEO\Support\RenderableCollection;
+use Foodineers\SEO\Support\SEOData;
+use Foodineers\SEO\Support\TwitterCardTag;
+use Foodineers\SEO\Tags\TwitterCard\Summary;
+use Foodineers\SEO\Tags\TwitterCard\SummaryLargeImage;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
 
 /** @phpstan-consistent-constructor */
-class TwitterCardTags extends Collection implements Renderable
+final class TwitterCardTags extends Collection implements Renderable
 {
     use RenderableCollection;
 
-    public static function initialize(SEOData $SEOData): ?static
+    public static function initialize(SEOData $SEOData): static
     {
-        $collection = new static;
+        $collection = new self;
 
         // No generic image that spans multiple pages
         $imageFallback = config('seo.image.fallback');

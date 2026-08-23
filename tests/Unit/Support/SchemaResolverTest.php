@@ -1,7 +1,9 @@
 <?php
 
-use Foodieneers\SEO\Support\SchemaResolver;
-use Foodieneers\SEO\Support\SEOData;
+declare(strict_types=1);
+
+use Foodineers\SEO\Support\SchemaResolver;
+use Foodineers\SEO\Support\SEOData;
 use Spatie\SchemaOrg\Graph;
 use Spatie\SchemaOrg\Schema;
 

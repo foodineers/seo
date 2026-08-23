@@ -1,15 +1,17 @@
 <?php
 
-namespace Foodieneers\SEO;
+declare(strict_types=1);
+
+namespace Foodineers\SEO;
 
 use const FILTER_VALIDATE_URL;
 
-use Foodieneers\SEO\Support\SEOData;
+use Foodineers\SEO\Support\SEOData;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Str;
 use Stringable;
 
-class TagManager implements Renderable, Stringable
+final class TagManager implements Renderable, Stringable
 {
     public ?SEOData $SEOData = null;
 
@@ -20,6 +22,11 @@ class TagManager implements Renderable, Stringable
         $this->tags = new TagCollection;
     }
 
+    public function __toString(): string
+    {
+        return $this->render();
+    }
+
     public function for(SEOData $source): static
     {
         $this->SEOData = $this->normalize($source);
@@ -28,7 +35,17 @@ class TagManager implements Renderable, Stringable
         return $this;
     }
 
-    protected function normalize(SEOData $source): SEOData
+    public function render(): string
+    {
+        if (! $this->SEOData instanceof SEOData) {
+            $this->for(new SEOData);
+        }
+
+        return $this->tags
+            ->reduce(fn (string $carry, Renderable $item): string => $carry .= Str::of($item->render())->trim().PHP_EOL, '');
+    }
+
+    private function normalize(SEOData $source): SEOData
     {
         $url = $source->url ?: request()->path();
         $SEOData = clone $source;
@@ -42,7 +59,7 @@ class TagManager implements Renderable, Stringable
         return $SEOData;
     }
 
-    protected function resolveTitle(?string $title, string $url): ?string
+    private function resolveTitle(?string $title, string $url): ?string
     {
         if ($title !== null || ! config('seo.title.infer_title_from_url')) {
             return $title;
@@ -51,7 +68,7 @@ class TagManager implements Renderable, Stringable
         return $this->inferTitleFromUrl($url);
     }
 
-    protected function applyConfigDefaults(SEOData $SEOData): void
+    private function applyConfigDefaults(SEOData $SEOData): void
     {
         $SEOData->description ??= config('seo.description.fallback');
         $SEOData->author ??= config('seo.author.fallback');
@@ -62,7 +79,7 @@ class TagManager implements Renderable, Stringable
         $SEOData->image ??= config('seo.image.fallback');
     }
 
-    protected function absolutizeAssets(SEOData $SEOData): void
+    private function absolutizeAssets(SEOData $SEOData): void
     {
         if ($SEOData->image && ! $this->isAbsoluteUrl($SEOData->image)) {
             $SEOData->imageMeta();
@@ -74,12 +91,12 @@ class TagManager implements Renderable, Stringable
         }
     }
 
-    protected function isAbsoluteUrl(string $value): bool
+    private function isAbsoluteUrl(string $value): bool
     {
         return filter_var(str_replace(' ', '%20', $value), FILTER_VALIDATE_URL) !== false;
     }
 
-    protected function inferTitleFromUrl(string $url): string
+    private function inferTitleFromUrl(string $url): string
     {
         $langCodes = ['en', 'fr', 'de', 'it', 'es'];
         $lastSegment = Str::of($url)->afterLast('/');
@@ -90,20 +107,5 @@ class TagManager implements Renderable, Stringable
         return $lastSegment
             ->headline()
             ->whenEmpty(fn (Stringable $str): string => 'Home');
-    }
-
-    public function render(): string
-    {
-        if (! $this->SEOData instanceof SEOData) {
-            $this->for(new SEOData);
-        }
-
-        return $this->tags
-            ->reduce(fn (string $carry, Renderable $item): string => $carry .= Str::of($item->render())->trim() . PHP_EOL, '');
-    }
-
-    public function __toString(): string
-    {
-        return $this->render();
     }
 }

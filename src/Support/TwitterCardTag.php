@@ -2,25 +2,27 @@
 
 declare(strict_types=1);
 
-namespace Foodieneers\SEO\Support;
+namespace Foodineers\SEO\Support;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
+use Override;
 
-class TwitterCardTag extends Tag
+final class TwitterCardTag extends Tag
 {
+    #[Override]
     public string $tag = 'meta';
 
     public function __construct(
         string $name,
-        string | HtmlString $content,
+        string|HtmlString $content,
     ) {
         $this->attributes['name'] = $name;
         $this->attributes['content'] = $content;
 
         $this->attributesPipeline[] = (fn (Collection $collection) => $collection->mapWithKeys(function (mixed $value, string $key): array {
             if ($key === 'name') {
-                $value = 'twitter:' . $value;
+                $value = 'twitter:'.$value;
             }
 
             return [$key => $value];

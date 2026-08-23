@@ -1,7 +1,9 @@
 <?php
 
-use Foodieneers\SEO\SEOService;
-use Foodieneers\SEO\Support\SEOData;
+declare(strict_types=1);
+
+use Foodineers\SEO\SEOService;
+use Foodineers\SEO\Support\SEOData;
 
 test('the SEOService singleton works as expected', function (): void {
     $serviceA = resolve(SEOService::class);

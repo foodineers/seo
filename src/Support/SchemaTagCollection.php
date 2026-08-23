@@ -1,12 +1,14 @@
 <?php
 
-namespace Foodieneers\SEO\Support;
+declare(strict_types=1);
+
+namespace Foodineers\SEO\Support;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
 
 /** @phpstan-consistent-constructor */
-class SchemaTagCollection extends Collection implements Renderable
+final class SchemaTagCollection extends Collection implements Renderable
 {
     public static function initialize(?SEOData $SEOData = null): ?static
     {
@@ -20,7 +22,7 @@ class SchemaTagCollection extends Collection implements Renderable
             return null;
         }
 
-        return new static($schemas);
+        return new self($schemas);
     }
 
     public function render(): string

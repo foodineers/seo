@@ -1,10 +1,12 @@
 <?php
 
-namespace Foodieneers\SEO\Tags\TwitterCard;
+declare(strict_types=1);
 
-use Foodieneers\SEO\Support\ImageMeta;
-use Foodieneers\SEO\Support\SEOData;
-use Foodieneers\SEO\Support\TwitterCardTag;
+namespace Foodineers\SEO\Tags\TwitterCard;
+
+use Foodineers\SEO\Support\ImageMeta;
+use Foodineers\SEO\Support\SEOData;
+use Foodineers\SEO\Support\TwitterCardTag;
 use Illuminate\Support\HtmlString;
 
 trait BuildsTwitterCard
