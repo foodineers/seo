@@ -6,7 +6,7 @@ namespace Foodineers\SEO\Support;
 
 use Override;
 
-final class LinkTag extends Tag
+abstract class LinkTag extends Tag
 {
     #[Override]
     public string $tag = 'link';

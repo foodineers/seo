@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Foodineers\SEO\Tags;
 
+use Foodineers\SEO\Support\GenericSitemapTag;
 use Foodineers\SEO\Support\SEOData;
 use Foodineers\SEO\Support\SitemapTag as SupportSitemapTag;
 
 final class SitemapTag extends SupportSitemapTag
 {
-    public static function initialize(?SEOData $SEOData = null): ?static
+    public static function initialize(?SEOData $SEOData = null): ?SupportSitemapTag
     {
         $sitemap = config('seo.sitemap');
 
@@ -17,6 +18,6 @@ final class SitemapTag extends SupportSitemapTag
             return null;
         }
 
-        return new self($sitemap);
+        return new GenericSitemapTag($sitemap);
     }
 }

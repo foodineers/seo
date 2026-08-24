@@ -6,7 +6,7 @@ namespace Foodineers\SEO\Support;
 
 use Override;
 
-final class SitemapTag extends LinkTag
+abstract class SitemapTag extends LinkTag
 {
     #[Override]
     public array $attributes = [
