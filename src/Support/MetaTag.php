@@ -7,7 +7,7 @@ namespace Foodineers\SEO\Support;
 use Illuminate\Support\HtmlString;
 use Override;
 
-final class MetaTag extends Tag
+abstract class MetaTag extends Tag
 {
     #[Override]
     public string $tag = 'meta';

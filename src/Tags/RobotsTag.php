@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Foodineers\SEO\Tags;
 
+use Foodineers\SEO\Support\GenericMetaTag;
 use Foodineers\SEO\Support\MetaTag;
 use Foodineers\SEO\Support\SEOData;
 
@@ -17,6 +18,6 @@ final class RobotsTag extends MetaTag
             $robotsContent = $SEOData?->robots ?? $robotsContent;
         }
 
-        return new MetaTag('robots', $robotsContent);
+        return new GenericMetaTag('robots', $robotsContent);
     }
 }
