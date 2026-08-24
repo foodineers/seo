@@ -6,7 +6,6 @@ namespace Foodineers\SEO\Tags;
 
 use Foodineers\SEO\Support\LinkTag;
 use Foodineers\SEO\Support\SEOData;
-use Illuminate\Support\Collection;
 
 /** @phpstan-consistent-constructor */
 final class FaviconTag extends LinkTag
@@ -25,9 +24,9 @@ final class FaviconTag extends LinkTag
         );
     }
 
-    public function collectAttributes(): Collection
+    /** @return list<string> */
+    protected function attributesOrder(): array
     {
-        return parent::collectAttributes()
-            ->sortKeys();
+        return ['href', 'rel'];
     }
 }
