@@ -5,8 +5,7 @@ declare(strict_types=1);
 use Foodineers\SEO\Support\SEOData;
 use Foodineers\SEO\TagManager;
 
-it('normalizes SEOData with config defaults and inferred title', function (): void {
-    config()->set('seo.title.infer_title_from_url', true);
+it('normalizes SEOData with config defaults', function (): void {
     config()->set('seo.description.fallback', 'Fallback description');
     config()->set('seo.author.fallback', 'Fallback author');
     config()->set('seo.site_name', 'Fallback site');
@@ -16,8 +15,7 @@ it('normalizes SEOData with config defaults and inferred title', function (): vo
         url: 'https://example.com/blog/my-article',
     ));
 
-    expect($manager->SEOData?->title)->toBe('My Article')
-        ->and($manager->SEOData?->description)->toBe('Fallback description')
+    expect($manager->SEOData?->description)->toBe('Fallback description')
         ->and($manager->SEOData?->author)->toBe('Fallback author')
         ->and($manager->SEOData?->siteName)->toBe('Fallback site')
         ->and($manager->SEOData?->twitterUsername)->toBe('@foodineers');

@@ -35,8 +35,9 @@ alwaysApply: true
 ## PHP
 
 ```php
-SEOService::setData(new SEOData(title: 'Home', description: '...'));
-echo SEOService::render();
+$seo = app(SEOService::class);
+$seo->setData(new SEOData(title: 'Home', description: '...'));
+echo $seo->render();
 
 // Tests / non-Blade:
 resolve(TagManager::class)->for(new SEOData(...))->render();

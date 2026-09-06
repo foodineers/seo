@@ -13,22 +13,20 @@ This repo is `foodineers/seo` (`Foodineers\SEO`). One `SEOData` object becomes H
 
 1. Build `Foodineers\SEO\Support\SEOData` (named args; omit unknowns).
 2. Pass to `SEOService::setData()` (usually `@seo`).
-3. `TagManager::for()` clones + normalizes (config, URLs, title inference, `noindex`).
-4. `TagCollection` builds tags; null tags are filtered out.
-5. `render()` concatenates remaining `Renderable`s.
+3. `TagManager::for()` clones + normalizes (config, URLs, `noindex`).
+4. `TagManager::render()` emits HTML strings.
 
-Never invent a second SEO data shape. Extend `SEOData` + a tag class + tests for new fields.
+Never invent a second SEO data shape. Extend `SEOData` + `TagManager` + tests for new fields.
 
 ## Layout
 
 ```
-src/SEOService.php | SEOServiceProvider.php | TagManager.php | TagCollection.php
-src/Support/SEOData.php | ImageMeta.php | SchemaResolver.php | SchemaTagCollection.php
-src/Tags/*  — one concern per tag; `initialize(?SEOData): ?Renderable`
+src/SEOService.php | SEOServiceProvider.php | TagManager.php
+src/Support/SEOData.php | ImageMeta.php
 ```
 
 ## Do / don't
 
 **Do:** treat `SEOData` as the public API; use `lang` for hreflang; Spatie `Schema::*` / `Graph` for JSON-LD; set `type: 'article'` before article OG fields; let `TagManager` absolutize relative image paths.
 
-**Don't:** implement `HasSEO` / Eloquent `seo` / `getDynamicSEOData` unless re-added to `src/`; use README `SchemaCollection` / `alternates`; bypass `SEOData` with raw HTML; put business logic in tag `initialize` beyond field→markup; assume title suffix / homepage_title config keys exist.
+**Don't:** implement `HasSEO` / Eloquent `seo` / `getDynamicSEOData` unless re-added to `src/`; use README `SchemaCollection` / `alternates`; bypass `SEOData` with raw HTML; assume title suffix / homepage_title / infer_title_from_url config keys exist.

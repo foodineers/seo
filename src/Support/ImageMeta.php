@@ -16,11 +16,11 @@ final class ImageMeta
 
     public function __construct(string $path)
     {
-        $publicPath = public_path($path);
-
-        if (filter_var(str_replace(' ', '%20', $path), FILTER_VALIDATE_URL)) {
+        if (self::isAbsoluteUrl($path)) {
             return;
         }
+
+        $publicPath = public_path($path);
 
         if (! is_file($publicPath)) {
             report(new Exception("Path {$publicPath} is not a file."));
@@ -28,9 +28,18 @@ final class ImageMeta
             return;
         }
 
-        [$width, $height] = getimagesize($publicPath);
+        $size = getimagesize($publicPath);
 
-        $this->width = $width;
-        $this->height = $height;
+        if ($size === false) {
+            return;
+        }
+
+        $this->width = $size[0];
+        $this->height = $size[1];
+    }
+
+    public static function isAbsoluteUrl(string $value): bool
+    {
+        return filter_var(str_replace(' ', '%20', $value), FILTER_VALIDATE_URL) !== false;
     }
 }

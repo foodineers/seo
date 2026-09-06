@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Foodineers\SEO\Facades\SEOService as SEOServiceFacade;
 use Foodineers\SEO\SEOService;
 use Foodineers\SEO\Support\SEOData;
 
@@ -43,15 +42,4 @@ it('renders via string cast', function (): void {
     $service->setData(new SEOData(title: 'Cast Title'));
 
     expect((string) $service)->toContain('Cast Title');
-});
-
-it('works through the facade', function (): void {
-    SEOServiceFacade::setData(new SEOData(
-        title: 'Facade Title',
-        description: 'Facade Description',
-    ));
-
-    expect(SEOServiceFacade::hasData())->toBeTrue()
-        ->and(SEOServiceFacade::render())->toContain('Facade Title')
-        ->toContain('Facade Description');
 });

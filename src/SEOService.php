@@ -28,17 +28,15 @@ final class SEOService implements Stringable
 
     public function render(): string
     {
-        if ($this->hasData()) {
-            return resolve(TagManager::class)
-                ->for($this->data)
-                ->render();
+        if ($this->data instanceof SEOData) {
+            return (new TagManager)->for($this->data)->render();
         }
 
         $title = config('seo.site_name');
 
         return sprintf(
             '<title>%s</title><meta name="robots" content="noindex, nofollow, noarchive">',
-            e($title)
+            e(is_string($title) ? $title : null)
         );
     }
 }

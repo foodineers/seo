@@ -18,7 +18,6 @@
     "require": {
         "php": "^8.5",
         "illuminate/contracts": "^12.0||^13.0",
-        "spatie/laravel-package-tools": "^1.93",
         "spatie/schema-org": "^4.0"
     },
     "require-dev": {
@@ -70,12 +69,7 @@
     },
     "extra": {
         "laravel": {
-            "providers": [
-                "Foodineers\\SEO\\SEOServiceProvider"
-            ],
-            "aliases": {
-                "SEOService": "Foodineers\\SEO\\Facades\\SEOService"
-            }
+            "providers": ["Foodineers\\SEO\\SEOServiceProvider"]
         }
     },
     "minimum-stability": "dev",

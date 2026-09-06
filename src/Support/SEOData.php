@@ -13,6 +13,7 @@ final class SEOData
 {
     /**
      * @param  array<string, string>  $lang
+     * @param  list<string>|null  $tags
      * @param  list<BaseType|Graph>  $schema
      */
     public function __construct(
@@ -24,7 +25,6 @@ final class SEOData
         public ?ImageMeta $imageMeta = null,
         public ?CarbonInterface $publishedAt = null,
         public ?CarbonInterface $modifiedAt = null,
-        public ?string $articleBody = null,
         public ?string $section = null,
         public ?array $tags = null,
         public ?string $twitterUsername = null,

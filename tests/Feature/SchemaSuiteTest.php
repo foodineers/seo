@@ -69,3 +69,26 @@ it('renders FAQPage schema from Spatie BaseType', function (): void {
         ->toContain('"@type":"FAQPage"')
         ->toContain('"name":"Example question?"');
 });
+
+it('keeps Graph instances separate from merged BaseTypes', function (): void {
+    $graph = new Graph;
+    $graph->add(Schema::product()->name('In graph'));
+    $organization = Schema::organization()->name('Example Site');
+
+    $output = renderSeo(new SEOData(schema: [$graph, $organization]));
+
+    expect(mb_substr_count($output, '<script type="application/ld+json">'))->toBe(2)
+        ->and($output)->toContain('"name":"In graph"')
+        ->and($output)->toContain('"@type":"Organization"');
+});
+
+it('throws for raw array schema items', function (): void {
+    new SEOData(schema: [[
+        '@context' => 'https://schema.org',
+        '@type' => 'FAQPage',
+    ]]);
+})->throws(InvalidArgumentException::class, 'Schema must be a BaseType or Graph.');
+
+it('throws for string schema items', function (): void {
+    new SEOData(schema: ['Website']);
+})->throws(InvalidArgumentException::class, 'Schema must be a BaseType or Graph.');

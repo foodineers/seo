@@ -5,27 +5,22 @@ declare(strict_types=1);
 namespace Foodineers\SEO;
 
 use Illuminate\Support\Facades\Blade;
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
-final class SEOServiceProvider extends PackageServiceProvider
+final class SEOServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        parent::register();
-
-        $this->app->singleton(SEOService::class, fn (): SEOService => new SEOService);
+        $this->mergeConfigFrom(__DIR__.'/../config/seo.php', 'seo');
+        $this->app->singleton(SEOService::class);
     }
 
-    public function configurePackage(Package $package): void
+    public function boot(): void
     {
-        $package
-            ->name('seo')
-            ->hasConfigFile();
-    }
+        $this->publishes([
+            __DIR__.'/../config/seo.php' => config_path('seo.php'),
+        ], 'seo-config');
 
-    public function bootingPackage(): void
-    {
         Blade::directive('seo', fn (?string $expression): string => "<?php app(\Foodineers\SEO\SEOService::class)->setData(new \Foodineers\SEO\Support\SEOData({$expression})); ?>");
         Blade::directive('seoData', fn (): string => "<?php echo app(\Foodineers\SEO\SEOService::class)->render(); ?>");
     }

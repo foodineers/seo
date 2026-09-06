@@ -16,7 +16,6 @@ Namespace: `Foodineers\SEO\Support\SEOData`. Pass only properties you set; leave
 | `url` | `?string` | Empty → `request()->path()`; then `url()` |
 | `imageMeta` | `?ImageMeta` | Auto from relative `image` during normalize |
 | `publishedAt` / `modifiedAt` | `?CarbonInterface` | OG article dates if `type === 'article'` |
-| `articleBody` | `?string` | On DTO; unused by built-in tags |
 | `section` / `tags` | `?string` / `?array` | OG article fields if `type === 'article'` |
 | `twitterUsername` | `?string` | Config adds leading `@` |
 | `type` | `?string` | Default `'website'`; gates article OG |

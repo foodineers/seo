@@ -17,9 +17,9 @@ expect($output)->toContain('<title>My title</title>');
 ## Extending the package
 
 1. Add a field to `SEOData` only if cross-cutting.
-2. Wire it in the relevant `Tags/*` class (`initialize` maps fields → markup).
+2. Wire it in `TagManager` (field → markup).
 3. Document it in `.cursor/rules/seo-data.mdc`.
 4. Add Pest for render + normalize edge cases.
 5. Keep examples aligned with real ctor + `@seo` / `@seoData` (not outdated README APIs).
 
-Preserve: `RenderableCollection` for tag collections; escape via existing `Tag`/`MetaTag` helpers; named ctor args / current PHP style.
+Escape via `TagManager` `el()` / `e()`. Named ctor args / current PHP style.

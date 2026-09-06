@@ -8,23 +8,22 @@ alwaysApply: true
 ## `TagManager::for()` pipeline
 
 1. URL: `$source->url ?: request()->path()` → later `url($url)`.
-2. Title: keep given; if null and `seo.title.infer_title_from_url`, headline last segment (`Home` for empty/`en|fr|de|it|es`).
-3. `??=` from config: description, author, twitter `@username`, siteName, locale, image.
-4. `noindex` → `robots = 'noindex, nofollow'`.
-5. Relative image → `imageMeta()` then `secure_url`.
+2. `??=` from config: description, author, twitter `@username`, siteName, image.
+3. `noindex` → `robots = 'noindex, nofollow'`.
+4. Relative image → `imageMeta()` then `secure_url`.
 
 Changing normalize → update `tests/Feature/TagManagerInputDataTest.php`.
 
-## Tag order (`TagCollection`)
+## Tag order (`TagManager`)
 
 1. Robots (`SEOData->robots` unless `seo.robots.force_default`)
 2. Canonical (if `seo.canonical_link`; `canonicalUrl ?? url`)
 3. Sitemap (config only)
 4. Description, Author, Title, Image
 5. OpenGraph (article fields only when `type === 'article'`)
-6. Twitter (card from image aspect: ≥~1.91 → `summary_large_image`)
-7. AlternateTags from `lang`
-8. SchemaTagCollection JSON-LD
+6. Twitter (card from image aspect: <1.5 → `summary`, else `summary_large_image`)
+7. Alternates from `lang`
+8. JSON-LD
 
 Skip empty tags; do not force empty markup.
 
@@ -34,4 +33,4 @@ Spatie only. Empty → no JSON-LD. One `BaseType` → one script. Multiple `Base
 
 ## Config (`config/seo.php`)
 
-`site_name`, `sitemap`, `canonical_link`, `robots.default` / `force_default`, `title.infer_title_from_url`, description/image/author `fallback`, `twitter.@username` (no `@`; package adds it). New keys → config + Pest + update these rules.
+`site_name`, `sitemap`, `canonical_link`, `robots.default` / `force_default`, description/image/author `fallback`, `twitter.@username` (no `@`; package adds it). New keys → config + Pest + update these rules.

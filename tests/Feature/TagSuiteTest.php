@@ -5,10 +5,6 @@ declare(strict_types=1);
 use Carbon\CarbonImmutable;
 use Foodineers\SEO\Support\ImageMeta;
 use Foodineers\SEO\Support\SEOData;
-use Foodineers\SEO\Tags\OpenGraphTags;
-use Foodineers\SEO\Tags\TwitterCard\Summary;
-use Foodineers\SEO\Tags\TwitterCard\SummaryLargeImage;
-use Foodineers\SEO\Tags\TwitterCardTags;
 
 it('renders title tag without inertia attribute', function (): void {
     $output = renderSeo(new SEOData(
@@ -68,6 +64,18 @@ it('renders robots tag using default or provided value', function (): void {
     ));
 
     expect($customRobots)->toContain('<meta name="robots" content="noindex, nofollow">');
+
+    config()->set('seo.robots.force_default', true);
+    config()->set('seo.robots.default', 'noindex');
+
+    $forced = renderSeo(new SEOData(
+        url: 'https://example.com/post',
+        robots: 'index, follow',
+    ));
+
+    expect($forced)
+        ->toContain('<meta name="robots" content="noindex">')
+        ->not->toContain('index, follow');
 });
 
 it('renders sitemap tag from config', function (): void {
@@ -156,7 +164,7 @@ it('renders OpenGraph tags including article metadata', function (): void {
     $imageMeta->width = 1200;
     $imageMeta->height = 630;
 
-    $output = OpenGraphTags::initialize(new SEOData(
+    $output = renderSeo(new SEOData(
         title: 'Default title',
         description: 'OG description',
         image: 'https://cdn.example.com/cover.jpg',
@@ -169,7 +177,7 @@ it('renders OpenGraph tags including article metadata', function (): void {
         type: 'article',
         siteName: 'Example',
         openGraphTitle: 'OG custom title',
-    ))->render();
+    ));
 
     expect($output)
         ->toContain('<meta property="og:title" content="OG custom title">')
@@ -192,13 +200,13 @@ it('renders twitter card tags with summary card when ratio is near square', func
     $imageMeta->width = 1000;
     $imageMeta->height = 900;
 
-    $output = TwitterCardTags::initialize(new SEOData(
+    $output = renderSeo(new SEOData(
         title: 'Twitter title',
         description: 'Twitter description',
         image: 'https://cdn.example.com/cover.jpg',
         imageMeta: $imageMeta,
         twitterUsername: '@example',
-    ))->render();
+    ));
 
     expect($output)
         ->toContain('<meta name="twitter:card" content="summary">')
@@ -213,42 +221,42 @@ it('renders twitter card tags with large image card when ratio is wide', functio
     $imageMeta->width = 2000;
     $imageMeta->height = 1000;
 
-    $output = TwitterCardTags::initialize(new SEOData(
+    $output = renderSeo(new SEOData(
         title: 'Twitter title',
         image: 'https://cdn.example.com/cover.jpg',
         imageMeta: $imageMeta,
-    ))->render();
+    ));
 
     expect($output)->toContain('<meta name="twitter:card" content="summary_large_image">');
 });
 
 it('uses summary_large_image for remote images without imageMeta', function (): void {
-    $output = TwitterCardTags::initialize(new SEOData(
+    $output = renderSeo(new SEOData(
         title: 'Remote image title',
         image: 'https://cdn.example.com/cover.jpg',
-    ))->render();
+    ));
 
     expect($output)->toContain('<meta name="twitter:card" content="summary_large_image">');
 });
 
 it('prefers openGraphTitle for twitter title', function (): void {
-    $output = TwitterCardTags::initialize(new SEOData(
+    $output = renderSeo(new SEOData(
         title: 'Default title',
         openGraphTitle: 'Share title',
-    ))->render();
+    ));
 
     expect($output)->toContain('<meta name="twitter:title" content="Share title">');
 });
 
-it('initializes summary twitter card only for supported dimensions', function (): void {
+it('renders summary twitter card only for supported dimensions', function (): void {
     $validMeta = new ImageMeta('https://cdn.example.com/cover.jpg');
     $validMeta->width = 500;
     $validMeta->height = 500;
 
-    $valid = Summary::initialize(new SEOData(
+    $valid = renderSeo(new SEOData(
         image: 'https://cdn.example.com/cover.jpg',
         imageMeta: $validMeta,
-    ))->render();
+    ));
 
     expect($valid)
         ->toContain('<meta name="twitter:card" content="summary">')
@@ -259,23 +267,23 @@ it('initializes summary twitter card only for supported dimensions', function ()
     $invalidMeta->width = 100;
     $invalidMeta->height = 100;
 
-    $invalid = Summary::initialize(new SEOData(
+    $invalid = renderSeo(new SEOData(
         image: 'https://cdn.example.com/cover.jpg',
         imageMeta: $invalidMeta,
     ));
 
-    expect($invalid)->toBeEmpty();
+    expect($invalid)->not->toContain('twitter:card');
 });
 
-it('initializes large image twitter card only for supported dimensions', function (): void {
+it('renders large image twitter card only for supported dimensions', function (): void {
     $validMeta = new ImageMeta('https://cdn.example.com/cover.jpg');
     $validMeta->width = 1200;
     $validMeta->height = 630;
 
-    $valid = SummaryLargeImage::initialize(new SEOData(
+    $valid = renderSeo(new SEOData(
         image: 'https://cdn.example.com/cover.jpg',
         imageMeta: $validMeta,
-    ))->render();
+    ));
 
     expect($valid)
         ->toContain('<meta name="twitter:card" content="summary_large_image">')
@@ -286,10 +294,10 @@ it('initializes large image twitter card only for supported dimensions', functio
     $invalidMeta->width = 200;
     $invalidMeta->height = 100;
 
-    $invalid = SummaryLargeImage::initialize(new SEOData(
+    $invalid = renderSeo(new SEOData(
         image: 'https://cdn.example.com/cover.jpg',
         imageMeta: $invalidMeta,
     ));
 
-    expect($invalid)->toBeEmpty();
+    expect($invalid)->not->toContain('twitter:card');
 });
