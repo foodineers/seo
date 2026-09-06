@@ -74,7 +74,6 @@ final class TagManager implements Renderable, Stringable
         $SEOData->author ??= config('seo.author.fallback');
         $SEOData->twitterUsername ??= Str::of(config('seo.twitter.@username'))->start('@')->toString();
         $SEOData->siteName ??= config('seo.site_name');
-        $SEOData->favicon ??= config('seo.favicon');
         $SEOData->locale ??= app()->getLocale();
         $SEOData->image ??= config('seo.image.fallback');
     }
@@ -84,10 +83,6 @@ final class TagManager implements Renderable, Stringable
         if ($SEOData->image && ! $this->isAbsoluteUrl($SEOData->image)) {
             $SEOData->imageMeta();
             $SEOData->image = secure_url($SEOData->image);
-        }
-
-        if ($SEOData->favicon !== null && ! $this->isAbsoluteUrl($SEOData->favicon)) {
-            $SEOData->favicon = secure_url($SEOData->favicon);
         }
     }
 

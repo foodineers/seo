@@ -20,7 +20,7 @@ Namespace: `Foodineers\SEO\Support\SEOData`. Pass only properties you set; leave
 | `section` / `tags` | `?string` / `?array` | OG article fields if `type === 'article'` |
 | `twitterUsername` | `?string` | Config adds leading `@` |
 | `type` | `?string` | Default `'website'`; gates article OG |
-| `siteName` / `favicon` / `locale` | `?string` | Config / `app()->getLocale()` fallbacks |
+| `siteName` / `locale` | `?string` | Config / `app()->getLocale()` fallbacks |
 | `robots` | `?string` | Overridden by `noindex: true` → `noindex, nofollow` |
 | `canonicalUrl` | `?string` | Else uses normalized `url` |
 | `openGraphTitle` | `?string` | OG/Twitter only; does not change `<title>` |
@@ -38,4 +38,4 @@ new SEOData(
 );
 ```
 
-Relative `image`/`favicon` → `secure_url()` after local `ImageMeta` sizing. Absolute URLs stay as-is (no dimension probe).
+Relative `image` → `secure_url()` after local `ImageMeta` sizing. Absolute URLs stay as-is (no dimension probe).

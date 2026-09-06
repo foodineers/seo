@@ -90,29 +90,24 @@ it('skips sitemap tag when config is empty', function (): void {
     expect($output)->not->toContain('rel="sitemap"');
 });
 
-it('skips author and favicon tags when values are empty', function (): void {
+it('skips author tag when value is empty', function (): void {
     config()->set('seo.author.fallback');
-    config()->set('seo.favicon');
 
     $output = renderSeo(new SEOData(
         url: 'https://example.com/post',
     ));
 
-    expect($output)
-        ->not->toContain('name="author"')
-        ->not->toContain('rel="shortcut icon"');
+    expect($output)->not->toContain('name="author"');
 });
 
-it('renders image and favicon tags and resolves relative paths', function (): void {
+it('renders image tag and resolves relative paths', function (): void {
     $output = renderSeo(new SEOData(
         image: '/images/social.jpg',
         url: 'https://example.com/post',
-        favicon: '/favicon-test.ico',
     ));
 
     expect($output)
-        ->toContain('<meta name="image" content="'.secure_url('/images/social.jpg').'">')
-        ->toContain('<link href="'.secure_url('/favicon-test.ico').'" rel="shortcut icon">');
+        ->toContain('<meta name="image" content="'.secure_url('/images/social.jpg').'">');
 });
 
 it('renders no alternate tags when lang is empty', function (): void {

@@ -30,7 +30,6 @@ final class SEOData
         public ?string $twitterUsername = null,
         public ?string $type = 'website',
         public ?string $siteName = null,
-        public ?string $favicon = null,
         public ?string $locale = null,
         public ?string $robots = null,
         public ?string $canonicalUrl = null,

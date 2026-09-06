@@ -11,9 +11,8 @@ This package generates **valid and useful meta tags straight out-of-the-box**, w
 3. OpenGraph Tags (Facebook, LinkedIn, etc.)
 4. Twitter Tags
 5. Structured data (Article, Breadcrumbs, FAQPage, or any custom schema)
-6. Favicon
-7. Robots tag
-8. Alternates links tag
+6. Robots tag
+7. Alternates links tag
 
 If you're familiar with Spatie's media-library package, this package works in almost the same way, but then only for SEO. I'm sure it will be very helpful for you, as it's usually best for a website to have attention for SEO right from the beginning.
 
@@ -125,14 +124,6 @@ return [
          */
         'force_default' => false,
     ],
-
-    /**
-     * Use this setting to specify the path to the favicon for your website. The url to it will be generated using the `secure_url()` function,
-     * so make sure to make the favicon accessible from the `public` folder.
-     *
-     * You can use the following filetypes: ico, png, gif, jpeg, svg.
-     */
-    'favicon' => null,
 
     'title' => [
         /**

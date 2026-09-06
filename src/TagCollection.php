@@ -10,7 +10,6 @@ use Foodineers\SEO\Tags\AlternateTags;
 use Foodineers\SEO\Tags\AuthorTag;
 use Foodineers\SEO\Tags\CanonicalTag;
 use Foodineers\SEO\Tags\DescriptionTag;
-use Foodineers\SEO\Tags\FaviconTag;
 use Foodineers\SEO\Tags\ImageTag;
 use Foodineers\SEO\Tags\OpenGraphTags;
 use Foodineers\SEO\Tags\RobotsTag;
@@ -33,7 +32,6 @@ final class TagCollection extends Collection
             AuthorTag::initialize($SEOData),
             TitleTag::initialize($SEOData),
             ImageTag::initialize($SEOData),
-            FaviconTag::initialize($SEOData),
             OpenGraphTags::initialize($SEOData),
             TwitterCardTags::initialize($SEOData),
             AlternateTags::initialize($SEOData),

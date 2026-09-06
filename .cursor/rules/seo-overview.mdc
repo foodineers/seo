@@ -5,7 +5,7 @@ alwaysApply: true
 
 # SEO package overview
 
-This repo is `foodineers/seo` (`Foodineers\SEO`). One `SEOData` object becomes HTML head tags (title, meta, OG, Twitter, alternates, favicon, robots, canonical, sitemap, JSON-LD).
+This repo is `foodineers/seo` (`Foodineers\SEO`). One `SEOData` object becomes HTML head tags (title, meta, OG, Twitter, alternates, robots, canonical, sitemap, JSON-LD).
 
 **Code under `src/` is the source of truth — not the README.** README still mentions removed APIs (`HasSEO`, `SchemaCollection`, `alternates`, `seo()->for($model)`). Prefer `SEOData`, `TagManager`, `SEOService`, and Pest suites.
 
@@ -29,6 +29,6 @@ src/Tags/*  — one concern per tag; `initialize(?SEOData): ?Renderable`
 
 ## Do / don't
 
-**Do:** treat `SEOData` as the public API; use `lang` for hreflang; Spatie `Schema::*` / `Graph` for JSON-LD; set `type: 'article'` before article OG fields; let `TagManager` absolutize relative image/favicon paths.
+**Do:** treat `SEOData` as the public API; use `lang` for hreflang; Spatie `Schema::*` / `Graph` for JSON-LD; set `type: 'article'` before article OG fields; let `TagManager` absolutize relative image paths.
 
 **Don't:** implement `HasSEO` / Eloquent `seo` / `getDynamicSEOData` unless re-added to `src/`; use README `SchemaCollection` / `alternates`; bypass `SEOData` with raw HTML; put business logic in tag `initialize` beyond field→markup; assume title suffix / homepage_title config keys exist.
